@@ -17,7 +17,7 @@
 
 ## 📋 What's changed
 
-* Android 5.0 target build, minimum version is 4.1
+* Android 5.0 target version, minimum version is 4.1
 * Moved to Gradle build system
 * Fixes in native C code for building with modern Android NDK
 * Updated and cleaned up resources and icons
