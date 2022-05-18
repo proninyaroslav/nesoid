@@ -18,7 +18,7 @@
 ## 📋 What's changed
 
 * Android 5.0 target version, minimum version is 4.1
-* Material UI
+* Material UI (Android 5.0+)
 * Moved to Gradle build system
 * Fixes in native C code for building with modern Android NDK
 * Updated and cleaned up resources and icons
