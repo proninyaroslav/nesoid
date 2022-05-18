@@ -1,0 +1,36 @@
+----June 29, 2001:
+ -Added the source code for zlib.  The makefile in the zlib directory should
+  be included by the platform makefile(such as Makefile.win) or zlib should
+  be linked in some other way.  If you use the zlib that comes with this
+  source distribution, you'll need to set up your compiler to recognize
+  the zlib subdirectory as a global include directory(like "-Izlib" with gcc).
+ -Changed the expected behavior of FCEUD_BlitScreen().  Added two new functions,
+  FCEUI_SetFirstRenderedLine() and FCEUI_SetLastRenderedLine().  See
+  porting.txt for details.
+
+
+----May 25, 2001:
+ -A few deobfuscations of the code(more will come in the future).
+ -Defined some macros to declare functions using different(faster) calling
+  conventions.  After redeclaring memory map emulation functions,
+  there was a somewhat significant speed increase.  Using the new calling conventions
+  for PPU_hook and MapIRQHook type functions resulted in a more significant
+  speed increase.
+ -Some of the driver<->emulator interface code has changed.  Much more
+  will change in the future.
+ -Added some stuff in types.h to (possibly) help people with compiling
+  FCE Ultra with MSVC++.
+
+----May 5, 2001:
+ -Optimized RAM reading/writing emulation in fce.c a little.
+ -Moved the UNIF board emulation code to the "boards" subdir.  UNIF support
+  isn't even near being done, though.  Not a high priority either.
+
+----April 16, 2001:
+ -Much of the driver interface code was restructured/rewritten, especially the
+  input-related code.  
+ -All driver functions called by the emulator are now prefixed with "FCEUD_".
+  (I may do something similar with the names of the driver interface functions).
+ -The core emulation code has been updated slightly since the Windows .53
+  release, but the changes are so minor that another binary release is not
+  necessary.

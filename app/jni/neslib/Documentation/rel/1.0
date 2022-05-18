@@ -1,0 +1,178 @@
+/******************************************************************************/
+/*  1.0)	What FCE Ultra is:                                            */
+/******************************************************************************/
+
+        FCE Ultra is an NTSC and PAL Famicom/NES emulator for various 
+        platforms. It is based upon Bero's original FCE source code.  Current
+	features include good PPU, CPU, pAPU, expansion chip, and joystick
+	emulation.  Also a feature unique to this emulator(at the current
+        time) is authentic Game Genie emulation.  Save states and snapshot
+	features also have been implemented.  The VS Unisystem is emulated
+        as well.  FCE Ultra supports iNES format ROM images, UNIF format ROM
+	images, headerless and FWNES style FDS disk images, and NSF files.
+
+        FCE Ultra currently supports the following iNES mappers(many partially):
+
+Number:         Description:                    Game Examples:
+--------------------------------------------------------------------------------
+  0             No Mapper                       Donkey Kong, Mario Bros
+  1             Nintendo MMC1                   MegaMan 2, Final Fantasy
+  2             Simple 16KB PRG Switch          MegaMan 1, Archon, 1944
+  3             Simple 8KB CHR Switch           Spy Hunter, Gradius
+  4             Nintendo MMC3                   Recca, TMNT 2, Final Fantasy 3
+  5             Nintendo MMC5                   Castlevania 3, Just Breed, Uchuu Keibitai SDF
+  6             FFE F4 Series(hacked)           Saint Seiya, Ganbare Goemon
+  7             AOROM                           Battle Toads, Lion King
+  8             FFE F3 Series(hacked)           Doraemon Kaitakuhen
+  9             Nintendo MMC2                   Punchout!
+ 10             Nintendo MMC4                   Fire Emblem, Fire Emblem Gaiden
+ 11             Color Dreams                    Crystal Mines, Bible Adventures
+ 13             CPROM                           Videomation
+ 15             Multi-cart(pirate)              100-in-1: Contra Function 16
+ 16             Bandai                          Dragon Ball Z, Gundam Knight
+ 17             FFE F8 Series(hacked)           Parodius, Last Armageddon
+ 18             Jaleco SS806                    Pizza Pop, Plazma Ball
+ 19             Namco 106                       Splatter House, Mappy Kids                
+ 21             Konami VRC4 2A                  WaiWai World 2, Ganbare Goemon Gaiden 2
+ 22             Konami VRC4 1B                  Twinbee 3
+ 23             Konami VRC2B                    WaiWai World, Getsufuu Maden
+ 24             Konami VRC6                     Akumajo Densetsu(Dracula 3)
+ 25             Konami VRC4                     Gradius 2, Bio Miracle: Boku tte Upa
+ 26             Konami VRC6 A0-A1 Inverse       Esper Dream 2, Madara
+ 32             Irem G-101                      Image Fight 2, Perman
+ 33             Taito TC0190/TC0350             Don Doko Don 1&2
+ 34             NINA-001 and BNROM		Impossible Mission 2, Deadly Towers, Bug Honey
+ 40             (pirate)                        Super Mario Bros. 2
+ 41             Caltron 6-in-1                  Caltron 6-in-1
+ 42		(pirate)			"Mario Baby"
+ 43		Multi-cart(pirate)		Golden Game 150 in 1
+ 44		Multi-cart(pirate)		Super HiK 7 in 1	
+ 45		Multi-cart(pirate)		Super 1000000 in 1
+ 46		Game Station			Rumble Station
+ 47		NES-QJ				Nintendo World Cup/Super Spike V.B.
+ 48		Taito TC190V			Flintstones
+ 49             Multi-cart(pirate)              Super HiK 4 in 1
+ 51		Multi-cart(pirate)		11 in 1 Ball Games
+ 52		Multi-cart(pirate)		Mario Party 7 in 1
+ 64             Tengen RAMBO-1                  Shinobi, Klax
+ 65             Irem H-3001                     Daiku no Gensan 2
+ 66             GNROM                           SMB + Duck Hunt
+ 67             Sunsoft Mapper "3"              Fantasy Zone 2
+ 68             Sunsoft Mapper "4"              After Burner 2, Nantetta Baseball 
+ 69             Sunsoft FME-7                   Batman: ROTJ, Gimmick!
+ 70		??				Kamen Rider Club
+ 71             Camerica                        Fire Hawk, Linus Spacehead
+ 72		Jaleco ??			Pinball Quest
+ 73             Konami VRC3                     Salamander
+ 75             Jaleco SS8805/Konami VRC1       Tetsuwan Atom, King Kong 2
+ 76             Namco 109                       Megami Tenshi 1
+ 77             Irem ??                         Napoleon Senki
+ 78             Irem 74HC161/32                 Holy Diver
+ 79             NINA-06				F15 City War, Krazy Kreatures
+ 80             Taito X-005                     Minelvation Saga
+ 82		Taito ??			Kyuukyoku Harikiri Stadium - Heisei Gannen Ban			
+ 83		Multi-cart(pirate)		Dragon Ball Party
+ 85             Konami VRC7                     Lagrange Point
+ 86		Jaleco ??			More Pro Baseball
+ 87		??				Argus
+ 89		Sunsoft ??			Mito Koumon
+ 90		Pirate                          Super Mario World, Mortal Kombat
+ 92             Jaleco ??                       MOERO Pro Soccer, MOERO Pro Yakyuu '88
+ 93		??				Fantasy Zone
+ 94		??				Senjou no Ookami
+ 95		Namco ??			Dragon Buster
+ 97		??				Kaiketsu Yanchamaru
+ 99             VS System 8KB CHR Switch        VS SMB, VS Excite Bike
+105             NES-EVENT                       Nintendo World Championships
+112             Asder				Sango Fighter, Hwang Di
+113		MB-91				Deathbots
+118		MMC3-TLSROM/TKSROM Board	Ys 3, Goal! 2, NES Play Action Football
+119             MMC3-TQROM Board                High Speed, Pin*Bot
+140		Jaleco ??			Bio Senshi Dan
+151             Konami VS System Expansion      VS The Goonies, VS Gradius
+152		??				Arkanoid 2, Saint Seiya Ougon Densetsu
+153             Bandai ??                       Famicom Jump 2
+180             ??                              Crazy Climber
+182		??				Super Donkey Kong
+184		??				Wing of Madoola, The
+189             Micro Genius TXC ??             Thunder Warrior
+225             Multi-cart(pirate)              58-in-1/110-in-1/52 Games
+226             Multi-cart(pirate)              76-in-1
+227		Multi-cart(pirate)		1200-in-1
+228             Action 52                       Action 52, Cheetahmen 2
+229             Multi-cart(pirate)              31-in-1
+232		BIC-48				Quattro Arcade, Quattro Sports
+234		Multi-cart ??			Maxi-15
+240             ??                              Gen Ke Le Zhuan, Shen Huo Le Zhuan
+242		??				Wai Xing Zhan Shi
+246		??				Fong Shen Ban
+248		??				Bao Qing Tian
+250		??				Time Diver Avenger
+
+	FCE Ultra currently supports the following UNIF boards(minus the 
+        prefixes HVC-, NES-, BTL-, and BMC-, as they are currently ignored):
+        
+Group:	Name:			Game Examples:
+--------------------------------------------------------------------------------
+Bootleg:
+        MARIO1-MALEE2		Super Mario Bros. Malee 2
+        NovelDiamond9999999in1	Novel Diamond 999999 in 1
+	Super24in1SC03		Super 24 in 1
+        Supervision16in1	Supervision 16-in-1
+
+Unlicensed:
+        Sachen-8259A		Super Cartridge Version 1
+        Sachen-8259B		Silver Eagle
+        Sachen-74LS374N		Auto Upturn
+        SA-016-1M		Master Chu and the Drunkard Hu
+        SA-72007		Sidewinder
+        SA-72008		Jovial Race
+        SA-0036			Mahjong 16
+        SA-0037			Mahjong Trap
+	TC-U01-1.5M		Challenge of the Dragon
+
+MMC1:
+	SAROM			Dragon Warrior
+	SBROM			Dance Aerobics
+	SCROM			Orb 3D
+	SEROM			Boulderdash
+	SGROM			Defender of the Crown
+	SKROM			Dungeon Magic
+	SLROM			Castlevania 2
+	SL1ROM			Sky Shark
+	SNROM			Shingen the Ruler
+	SOROM			Nobunaga's Ambition
+
+MMC3:
+	TFROM			Legacy of the Wizard
+	TGROM			Megaman 4
+	TKROM			Kirby's Adventure
+	TKSROM			Ys 3
+	TLROM			Super Spike V'Ball
+	TLSROM			Goal! 2
+	TR1ROM			Gauntlet
+	TQROM			Pinbot
+	TSROM			Super Mario Bros. 3
+	TVROM			Rad Racer 2
+
+MMC5:
+	EKROM			Gemfire
+	ELROM			Castlevania 3
+	ETROM			Nobunaga's Ambition 2
+	EWROM			Romance of the Three Kingdoms 2
+
+MMC6:
+	HKROM			Star Tropics
+
+Nintendo
+discrete
+logic:
+        CNROM			Gotcha
+        CPROM			Videomation
+        MHROM
+        NROM-128		Mario Bros.
+        NROM-256		Super Mario Bros.
+        RROM-128
+        UNROM			Megaman
+
+

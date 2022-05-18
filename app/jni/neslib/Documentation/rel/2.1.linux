@@ -1,0 +1,62 @@
+/******************************************************************************/
+/*  2.1)        General Keyoard Key Mapping:                                  */
+/******************************************************************************/
+
+        Default Key Mapping:
+
+         For emulated Family BASIC Keyboard:
+          Enable/Disable Keyboard Input         Scroll Lock
+                (enabling emulated keyboard input will disable
+                 commands keys)
+          All emulated keys are mapped to the closest open key on the PC
+          keyboard, with a few exceptions.  The emulated "@" key is
+          mapped to the "`"(grave) key, and the emulated "kana" key
+          is mapped to the "Insert" key(in the 3x2 key block above the
+          cursor keys).
+
+         For emulated game pads:
+          Left Control             B
+          Left Alt                 A
+          Enter/Return             Start
+          Tab                      Select
+          Cursor Down              Down
+          Cursor Up                Up
+          Cursor Left              Left
+          Cursor Right             Right
+
+         For emulated power pads(keys correspond to button locations on
+         side "B"):
+          O P [ ]
+          K L ; '
+          M , . /
+
+         For FDS games:
+          I                        Insert disk.
+          E                        Eject disk.
+          S                        Select disk/disk side.
+	 
+         For VS Unisystem games:
+          C                        Insert coin.
+          V                        Show/Hide dip switches.
+           1-8                      Toggle dip switches(when dip switches
+                                    are shown).
+
+         T                        Select tint to adjust.
+         H                        Select hue to adjust.
+         +/-                      Increase/decrease tint or hue.
+
+         0-9                      Select save state.
+         Caps Lock                Select virtual joystick.
+
+	 F2		  	  Activate cheat interface.
+
+         F3                       Lock virtual console.
+         F4                       Unlock virtual console.
+
+         F5/F7                    Save/Load state.
+         F9                       Save screen snapshot.
+         F10                      Reset.
+	 F11			  Power off/on.
+         ESC/F12                  Exit.
+
+

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:androidemu="http://androidemu.com/apk/res/android" >
+
+    <PreferenceScreen android:title="@string/audio_video_settings" >
+        <PreferenceCategory android:title="@string/audio_settings" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="soundEnabled"
+                android:title="@string/enable_sound" />
+
+            <com.androidemu.nes.SeekBarPreference
+                android:defaultValue="100"
+                android:dependency="soundEnabled"
+                android:key="soundVolume"
+                android:title="@string/sound_volume" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/video_settings" >
+            <ListPreference
+                android:defaultValue="proportional"
+                android:entries="@array/scaling_mode_entries"
+                android:entryValues="@array/scaling_mode_entryvalues"
+                android:key="scalingMode"
+                android:title="@string/scaling_mode" />
+            <ListPreference
+                android:defaultValue="1.3333"
+                android:entries="@array/aspect_ratio_entries"
+                android:entryValues="@array/aspect_ratio_entryvalues"
+                android:key="aspectRatio"
+                android:title="@string/aspect_ratio" />
+
+            <CheckBoxPreference
+                android:key="accurateRendering"
+                android:summary="@string/accurate_rendering_summary"
+                android:title="@string/accurate_rendering" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/frame_skip_settings" >
+            <ListPreference
+                android:defaultValue="2x"
+                android:entries="@array/fast_forward_speed_entryvalues"
+                android:entryValues="@array/fast_forward_speed_entryvalues"
+                android:key="fastForwardSpeed"
+                android:title="@string/fast_forward_speed" />
+            <ListPreference
+                android:defaultValue="auto"
+                android:entries="@array/frame_skip_entries"
+                android:entryValues="@array/frame_skip_entryvalues"
+                android:key="frameSkipMode"
+                android:title="@string/frame_skip_mode" />
+
+            <com.androidemu.nes.SeekBarPreference
+                android:defaultValue="2"
+                android:key="maxFrameSkips"
+                android:summary="@string/max_frame_skips_summary"
+                android:title="@string/max_frame_skips"
+                androidemu:maxValue="10" />
+
+            <ListPreference
+                android:defaultValue="default"
+                android:entries="@array/refresh_rate_entries"
+                android:entryValues="@array/refresh_rate_entryvalues"
+                android:key="refreshRate"
+                android:summary="@string/refresh_rate_summary"
+                android:title="@string/refresh_rate" />
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/input_settings" >
+        <ListPreference
+            android:defaultValue="none"
+            android:entries="@array/second_controller_entries"
+            android:entryValues="@array/second_controller_entryvalues"
+            android:key="secondController"
+            android:summary="@string/second_controller_summary"
+            android:title="@string/second_controller" />
+
+        <PreferenceScreen
+            android:key="keyMappings"
+            android:summary="@string/key_mappings_summary"
+            android:title="@string/key_mappings" >
+            <Preference
+                android:key="gameGripper"
+                android:layout="@layout/game_gripper" />
+
+            <PreferenceCategory android:title="@string/key_profiles" >
+                <PreferenceScreen
+                    android:key="loadKeyProfile"
+                    android:title="@string/load_profile" />
+                <PreferenceScreen
+                    android:key="saveKeyProfile"
+                    android:title="@string/save_profile" />
+            </PreferenceCategory>
+            <PreferenceCategory
+                android:key="gamepad1"
+                android:title="@string/gamepad_1" />
+            <PreferenceCategory android:title="@string/gamepad_2" >
+                <PreferenceScreen
+                    android:key="gamepad2"
+                    android:title="@string/key_mappings" />
+            </PreferenceCategory>
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="enableVKeypad"
+            android:title="@string/enable_vkeypad" />
+
+        <PreferenceScreen
+            android:dependency="enableVKeypad"
+            android:summary="@string/vkeypad_settings_summary"
+            android:title="@string/vkeypad_settings" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="enableVibrator"
+                android:title="@string/enable_vibrator" />
+            <CheckBoxPreference
+                android:key="dpad4Way"
+                android:title="@string/dpad_4way" />
+
+            <com.androidemu.nes.SeekBarPreference
+                android:defaultValue="2"
+                android:key="dpadDeadZone"
+                android:title="@string/dpad_deadzone"
+                androidemu:maxValue="4" />
+
+            <PreferenceCategory android:title="@string/two_buttons_press" >
+                <CheckBoxPreference
+                    android:key="inBetweenPress"
+                    android:summary="@string/in_between_press_summary"
+                    android:title="@string/in_between_press" />
+                <CheckBoxPreference
+                    android:key="pointSizePress"
+                    android:summary="@string/point_size_press_summary"
+                    android:title="@string/point_size_press" />
+
+                <com.androidemu.nes.SeekBarPreference
+                    android:defaultValue="7"
+                    android:dependency="pointSizePress"
+                    android:key="pointSizePressThreshold"
+                    android:title="@string/point_size_press_threshold"
+                    androidemu:maxValue="10" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/appearance" >
+                <ListPreference
+                    android:defaultValue="medium"
+                    android:entries="@array/vkeypad_size_entries"
+                    android:entryValues="@array/vkeypad_size_entryvalues"
+                    android:key="vkeypadSize"
+                    android:title="@string/vkeypad_size" />
+
+                <com.androidemu.nes.SeekBarPreference
+                    android:defaultValue="50"
+                    android:key="vkeypadTransparency"
+                    android:title="@string/vkeypad_transparency" />
+
+                <PreferenceScreen
+                    android:key="hideControls"
+                    android:title="@string/hide_controls" >
+                    <CheckBoxPreference
+                        android:key="hideDpad"
+                        android:title="@string/hide_dpad" />
+                    <CheckBoxPreference
+                        android:key="hideButtons"
+                        android:title="@string/hide_buttons" />
+                    <CheckBoxPreference
+                        android:key="hideExtraButtons"
+                        android:title="@string/hide_extra_buttons" />
+                    <CheckBoxPreference
+                        android:defaultValue="true"
+                        android:key="disableExtraButtons"
+                        android:title="@string/disable_extra_buttons" />
+                    <CheckBoxPreference
+                        android:key="hideSelectStart"
+                        android:title="@string/hide_select_start" />
+                </PreferenceScreen>
+            </PreferenceCategory>
+
+            <ListPreference
+                android:defaultValue="top_bottom"
+                android:entries="@array/vkeypad_layout_entries"
+                android:entryValues="@array/vkeypad_layout_entryvalues"
+                android:key="vkeypadLayout"
+                android:title="@string/vkeypad_layout" />
+
+            <com.androidemu.nes.SeekBarPreference
+                android:defaultValue="2"
+                android:key="layoutMargin"
+                android:title="@string/layout_margin"
+                androidemu:maxValue="5" />
+        </PreferenceScreen>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="enableTrackball"
+            android:title="@string/enable_trackball" />
+
+        <com.androidemu.nes.SeekBarPreference
+            android:defaultValue="2"
+            android:dependency="enableTrackball"
+            android:key="trackballSensitivity"
+            android:title="@string/trackball_sensitivity"
+            androidemu:maxValue="5" />
+
+        <CheckBoxPreference
+            android:key="enableSensor"
+            android:title="@string/enable_sensor" />
+
+        <com.androidemu.nes.SeekBarPreference
+            android:defaultValue="7"
+            android:dependency="enableSensor"
+            android:key="sensorSensitivity"
+            android:title="@string/sensor_sensitivity"
+            androidemu:maxValue="9" />
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/netplay_settings" >
+        <com.androidemu.nes.SeekBarPreference
+            android:key="maxFramesAhead"
+            android:summary="@string/max_frames_ahead_summary"
+            android:title="@string/max_frames_ahead"
+            androidemu:maxValue="10" />
+
+        <CheckBoxPreference
+            android:key="autoSyncClient"
+            android:title="@string/auto_sync_client" />
+
+        <ListPreference
+            android:defaultValue="30"
+            android:dependency="autoSyncClient"
+            android:entries="@array/auto_sync_client_entries"
+            android:entryValues="@array/auto_sync_client_entryvalues"
+            android:key="autoSyncClientInterval"
+            android:title="@string/auto_sync_client_interval" />
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/other_settings" >
+        <PreferenceCategory android:title="@string/cheating" >
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="enableCheats"
+                android:title="@string/enable_cheats" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/bios" >
+            <CheckBoxPreference
+                android:key="enableGameGenie"
+                android:title="@string/enable_game_genie" />
+
+            <PreferenceScreen
+                android:dependency="enableGameGenie"
+                android:key="gameGenieRom"
+                android:title="@string/game_genie_rom" />
+            <PreferenceScreen
+                android:key="fdsRom"
+                android:title="@string/fds_rom" />
+        </PreferenceCategory>
+        <PreferenceCategory android:title="@string/user_settings" >
+            <CheckBoxPreference
+                android:key="flipScreen"
+                android:summary="@string/flip_screen_summary"
+                android:title="@string/flip_screen" />
+
+            <ListPreference
+                android:defaultValue="unspecified"
+                android:entries="@array/orientation_entries"
+                android:entryValues="@array/orientation_entryvalues"
+                android:key="orientation"
+                android:summary="@string/orientation_summary"
+                android:title="@string/orientation" />
+
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="fullScreenMode"
+                android:summary="@string/full_screen_mode_summary"
+                android:title="@string/full_screen_mode" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="quickLoadOnStart"
+                android:summary="@string/quick_load_on_start_summary"
+                android:title="@string/quick_load_on_start" />
+            <CheckBoxPreference
+                android:key="useInputMethod"
+                android:summary="@string/use_input_method_summary"
+                android:title="@string/use_input_method" />
+
+            <PreferenceScreen android:title="@string/shortcut_keys" >
+                <com.androidemu.nes.KeyPreference
+                    android:key="quickLoad"
+                    android:title="@string/quick_load" />
+                <com.androidemu.nes.KeyPreference
+                    android:key="quickSave"
+                    android:title="@string/quick_save" />
+                <com.androidemu.nes.KeyPreference
+                    android:key="fastForward"
+                    android:title="@string/fast_forward" />
+                <com.androidemu.nes.KeyPreference
+                    android:key="screenshot"
+                    android:title="@string/screenshot" />
+            </PreferenceScreen>
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen android:title="@string/app_about" >
+        <PreferenceScreen
+            android:key="about"
+            android:title="@string/about" />
+        <PreferenceScreen
+            android:key="github"
+            android:title="@string/github" />
+        <PreferenceScreen
+            android:key="searchRoms"
+            android:title="@string/search_roms" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

@@ -1,0 +1,35 @@
+/******************************************************************************/
+/*  3.5)        Palette Notes                                                 */
+/******************************************************************************/
+
+	Palettes files are expected to contain 64 8-bit RGB triplets(each in
+	that order; red comes first in the triplet in the file, then green, 
+	then blue).  Each 8-bit value represents brightness for that particular
+	color.  0 is minimum, 255 is maximum.
+
+	Palettes can be set on a per-game basis.  To do this, put a palette
+	file in the "gameinfo" directory with the same base filename
+	as the game you wish to associate with and the extension "pal".  
+	Examples:
+
+		File name:		Palette file name:
+		 BigBad.nes		 BigBad.pal
+		 BigBad.zip		 BigBad.pal
+		 BigBad.Better.nes	 BigBad.Better.pal
+
+
+        With so many ways to choose a palette, figuring out which one will
+        be active may be difficult.  Here's a list of what palettes will
+        be used, in order from highest priority to least priority(if a condition
+        doesn't exist for a higher priority palette, the emulator will
+        continue down its list of palettes).
+
+        NSF Palette(for NSFs only)
+         Palette loaded from the "gameinfo" directory.
+          NTSC Color Emulation(only for NTSC NES games).
+           VS Unisystem palette(if the game is a VS Unisystem game and a palette
+           is available).
+            Custom global palette.
+             Default NES palette.
+
+

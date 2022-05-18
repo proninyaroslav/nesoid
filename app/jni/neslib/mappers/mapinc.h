@@ -1,0 +1,12 @@
+#include "../types.h"
+#include "../x6502.h"
+#include "../fce.h"
+#include "../ppu.h"
+#define INESPRIV
+#include "../cart.h"
+#include "../ines.h"
+#include "../_memory.h"
+#include "../sound.h"
+#include "../state.h"
+#include "../svga.h"
+#include <string.h>

@@ -1,0 +1,109 @@
+/******************************************************************************/
+/*  2.0) Starting FCE Ultra                                                   */
+/******************************************************************************/
+
+        Start FCE Ultra using the following format:
+
+        ./fceu <arguments> romimage.nes
+
+        <arguments> can be one or more of the following:
+
+        -vmode x        Select video mode(all are 8 bpp).
+                         1 = 256x240 @ 72 hz	<Default>
+                         2 = 256x256 @ 65 hz
+                         3 = 256x256(with scanlines) @ 120 hz
+                         4 = 640x480(with scanlines)
+                         5 = 640x480("1 per 4")
+                         6 = 256x224(with scanlines) @ 120 hz
+			 7 = 320x240
+			 8 = 256x224 @ 103 hz
+	-vsync x        Wait for the screen's vertical retrace before updating 
+			the screen.  If you have sound enabled and enable this,
+			you may have to increase the number of sound fragments
+			from the default of 8, to reduce buffer underruns.
+			Buffer underruns will not be preventable if the 
+		        current video refresh rate is < ~60 hz (or < ~50 hz 
+			if PAL emulation is enabled).
+	                 0 = Disabled.	<Default>
+        	         1 = Enabled.
+	-cpalette x	Load a custom global palette from file x.  
+			The filename x is saved in the configuration file,
+			not the data from the file.  Note that you should
+			probably use an absolute("/home/jp/test.pal") filename
+			rather than a relative("test.pal") filename.  If x is 0,
+		        the default (built in) global palette will be used.
+        -ntsccol        Emulate an NTSC's TV's colors based on user-supplied
+                        hue and tint values.
+                         0 = Disabled.	<Default>
+                         1 = Enabled.
+        -sound   x      Sound.          <Default=48000>
+                         0 = Disabled.
+                         Otherwise, x = playback rate in samples per second.
+	-soundvol x     Sound volume. x is an integral percentage value.
+			The default value is, obviously, 100.
+			Setting it higher will increase the likelihood that
+			sound clipping will occur.  This shouldn't be noticeable
+			if the volume is reasonable(200% or lower; perhaps even
+			higher for many games).
+	-sfragsize x    Set sound fragment size to 2^x(2 to the power of x)
+		        SAMPLES.  The default value is 7.
+	-snfrags x      Set number of sound fragments to x.  The default value
+			is 8.
+        -f8bit x        Force 8-bit sound.  Enabling this will decrease
+                        sound quality noticeably without increasing
+                        performance noticeably.  Only use when 16-bit sound
+                        is problematic.
+                         0 = Disabled.	<Default>
+                         1 = Enabled.
+        -nothrottle x   Disables speed throttling used when sound is disabled
+                        if x is non-zero.  The default value of x is 0.
+	-joyx y         Joystick mapped to virtual joystick x(1-4).
+        	         0 = Disabled, reset configuration.	<Default>
+	                 Otherwise, y(1-inf) = joystick number.
+        -inputx str     Select device mapped to virtual NES-style input port 
+			x(1-2).
+			The default for both virtual input ports is "gamepad".
+                         str may be: none, gamepad, zapper, powerpada, 
+				     powerpadb, arkanoid
+	-fcexp str      Select Famicom expansion port device.  If you select
+			a device other than "none", you should enable the
+			"gamepad" on both NES-style virtual input ports.
+			The default is "none".
+	                 str may be: none, shadow, arkanoid, 4player, fkb
+	-nofs x         Disables Four-Score emulation if x is 1.  Default is 0.
+			Note that Four-Score emulation will only be active
+			if "gamepad" is mapped to one or both virtual input
+			ports.
+	-gg             Enable Game Genie emulation.
+        -pal            Emulate a PAL NES.
+        -no8lim x       Disables the 8 sprites per scanline limitation.
+                         0 = Limitation enabled.	<Default>
+                         1 = Limitation disabled.
+        -subase x       Save extra game data files(such as battery-backed RAM)
+                        under the base directory if enabled.
+                         0 = Disabled.	<Default>
+                         1 = Enabled.
+	-snapname x     Selects what type of file name screen snapshots will 
+			have.
+	                 0 = Numeric(0.png)	<Default>
+	                 1 = File base and numeric(mario-0.png)
+	-clipsides x    Clip leftmost and rightmost 8 columns of pixels of 
+			video output.
+			 0 = Disabled.	<Default>
+			 1 = Enabled.
+        -slstart x      Set the first drawn emulated scanline for NTSC emulation
+                        mode.  Valid values for x are 0 through 239.
+                        The default value is 8.
+        -slend x        Set the last drawn emulated scanline for NTSC emulation
+                        mode. Valid values for x are 0 through 239.
+                        The default value is 239.
+        -slstartp x     Set the first drawn emulated scanline for PAL emulation
+                        mode.  Valid values for x are 0 through 239.
+                        The default value is 0.
+        -slendp x       Set the last drawn emulated scanline for PAL emulation
+                        mode. Valid values for x are 0 through 239.
+                        The default value is 239.
+        -connect   s    Connect to server 's' for TCP/IP network play.
+        -server         Be a host/server for TCP/IP network play.
+	-netport x	Use TCP/IP port x for network play.  The default
+			port is 4046.

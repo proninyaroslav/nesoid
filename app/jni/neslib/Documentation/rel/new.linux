@@ -1,0 +1,6 @@
+        *  Added a new video mode(256x224 at a refresh rate of 103 Hz).
+        *  Increased the refresh rate of video mode 2 to 65 Hz.
+        *  Increased the refresh rate of video mode 3 to 120 Hz.
+        *  Added speed throttling used when sound is disabled, and a
+           command-line switch to control it.
+

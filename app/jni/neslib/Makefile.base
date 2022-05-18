@@ -1,0 +1,45 @@
+CFLAGS  = -Wall  ${TFLAGS}
+OBJECTS = fce.o video.o general.o endian.o svga.o sound.o nsf.o fds.o netplay.o ines.o state.o unif.o input.o file.o cart.o crc32.o memory.o cheat.o debug.o md5.o vsuni.o palette.o
+# x6502.o
+
+fceu: 		fceu2
+include	mappers/Makefile
+include boards/Makefile
+include input/Makefile
+
+fceu2:	        ${OBJECTS} ${MOBJS} ${MUOBJS} ${MUSOBJS} ${INPOBJS} ${OBJDRIVER}
+		${CC} -o fceu ${OBJECTS} ${MOBJS} ${MUOBJS} ${MUSOBJS} ${INPOBJS} ${OBJDRIVER} ${LDRIVER}
+ifndef NOSTRIP
+		$(STRIP) fceu
+endif
+
+clean:
+		${RM} fceu fceu.exe ${OBJECTS} ${INPOBJS} ${MOBJS} ${MUOBJS} ${MUSOBJS} ${OBJDRIVER}
+
+nsf.o:		nsf.c nsf.h fce.h x6502.h svga.h video.h sound.h general.h file.h
+#x6502.o:	x6502.c x6502.h ops.h fce.h sound.h
+video.o:	video.c types.h video.h svga.h version.h general.h
+sound.o:	sound.c sound.h types.h fce.h svga.h x6502.h
+svga.o:		svga.c svga.h types.h palette.h state.h netplay.h fds.h fce.h nsf.h video.h sound.h palettes/*.h driver.h drawing.h
+netplay.o:	netplay.c netplay.h types.h svga.h
+
+state.o:        state.c state.h
+
+unif.o:		unif.c unif.h file.h cart.h
+
+memory.o:	memory.c memory.h
+
+cart.o:		cart.c cart.h types.h version.h fce.h
+fce.o:          fce.c *.h
+fds.o:		fds.h x6502.h types.h version.h fce.h svga.h sound.h general.h state.h file.h memory.h
+ines.o:         ines.c ines.h x6502.h types.h fce.h ines.h version.h svga.h general.h state.h file.h memory.h cart.h crc32.h banksw.h
+input.o:	input.c input.h x6502.h types.h fce.h sound.h netplay.h driver.h svga.h
+
+crc32.o:	crc32.c crc32.h types.h
+endian.o:	endian.c endian.h types.h
+file.o:		file.c file.h types.h endian.h memory.h driver.h
+general.o:	general.c general.h types.h state.h version.h
+
+cheat.o:	cheat.c driver.h
+
+debug.o:	debug.c debug.h fce.h

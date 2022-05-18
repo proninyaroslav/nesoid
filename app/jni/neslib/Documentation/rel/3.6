@@ -1,0 +1,19 @@
+/******************************************************************************/
+/*  3.6)        Compressed File Notes                                         */
+/******************************************************************************/
+
+        FCE Ultra can load data from both PKZIP-format files and
+        gzip-format files.  Only one type of (de)compression algorithm is
+        supported:  "deflate"; this seems to be the most popular compression
+        algorithm, though.
+
+        A compressed FDS disk image will only be saved back to disk if it
+        uses the gzip format.
+
+        All files in a PKZIP format file will be scanned for the
+        followings extensions:  .nes, .fds, .nsf, .unf, .nez, .unif
+        The first compressed file to have one of these extensions will be
+        loaded. If no compressed file has one of these extensions, the
+        first compressed file will be loaded.
+
+

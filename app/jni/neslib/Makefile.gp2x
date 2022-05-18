@@ -1,0 +1,88 @@
+CROSS	= arm-linux-
+CC	= $(CROSS)gcc
+STRIP	= $(CROSS)strip
+AS	= $(CROSS)as
+TFLAGS  = -Winline -mcpu=arm920t -Izlib -DGP2X=1 -DLSB_FIRST -DUNIX -DPSS_STYLE=1 -DHAVE_ASPRINTF -DZLIB -DFRAMESKIP -D_REENTRANT
+ASFLAGS	= -mcpu=arm920t -mfloat-abi=soft
+RM	= rm -f
+B	= drivers/gp2x/
+ifdef DEBUG
+TFLAGS	+= -ggdb
+LDRIVER	+= -ggdb
+NOSTRIP = 1
+else
+TFLAGS	+= -ftracer -fstrength-reduce -fomit-frame-pointer -fstrict-aliasing -ffast-math # -funroll-loops
+TFLAGS	+= -O3 #-pg -fno-omit-frame-pointer
+LDRIVER	+= -O3 #-pg -fno-omit-frame-pointer
+endif
+
+#NOSTRIP = 1
+
+asm_6502=1
+#debug_asm_6502=1
+
+all:		fceu
+
+gpfce.gpe: fceu
+	cp fceu $@
+
+include zlib/Makefile
+
+OBJDRIVER	 = ${B}minimal.o ${B}cpuctrl.o ${B}squidgehack.o ${B}asmutils.o ${B}gp2x.o ${B}main.o ${B}throttle.o \
+		${B}unix-netplay.o ${B}gp2x-sound.o ${B}gp2x-video.o ${B}usbjoy.o ${B}menu.o ${B}fonts.o ${B}readpng.o \
+		drivers/common/cheat.o drivers/common/config.o drivers/common/args.o drivers/common/vidblit.o ${UNZIPOBJS} \
+		ppu.o movie.o fceu098.o ppu098.o
+LDRIVER		+= -lm -lz -lpng -static -Wl,-Map=fceu.map
+
+ifeq ($(asm_6502),1)
+TFLAGS  += -DASM_6502
+OBJDRIVER += ncpu.o
+ifeq ($(debug_asm_6502),1)
+TFLAGS  += -DDEBUG_ASM_6502
+OBJDRIVER += x6502.o ncpu_debug.o
+endif
+else
+OBJDRIVER += x6502.o
+endif
+
+x6502.o: x6502.c x6502.h ops.h fce.h sound.h dprintf.h
+
+ncpu.o: ncpu.S ncpu.h
+	$(CC) $(TFLAGS) -c $< -o $@
+
+include Makefile.base
+
+${B}main.o:		${B}main.c ${B}main.h ${B}usage.h ${B}input.c
+${B}gp2x.o:		${B}gp2x.c ${B}gp2x.h ${B}rev.h
+${B}throttle.o:         ${B}throttle.c ${B}main.h ${B}throttle.h
+ppu.o:			ppu.c ppu.h
+
+${B}rev.h: FORCE
+	@if [ -f $@ ]; then prevrev=`cat $@`; else prevrev="00"; fi; \
+	if [ "`which svn`" != "" ]; then \
+		rev=`svn update|tail -n 1|sed 's/.*\ \(.*\)\./\1/g'|sed "s/'//g"`; \
+	fi; \
+	if [ "$$rev"  = "" ]; then rev="0"; fi; \
+	if [ "$$rev" != "$$prevrev" ]; then \
+		echo "$$rev" > $@; \
+	fi
+
+.PHONY: FORCE
+
+include Makefile.common
+
+up: fceu
+	cp -v fceu /mnt/gp2x/mnt/sd/emus/gpfce/gpfce.gpe
+
+# ----------- release -----------
+ifneq ($(findstring rel,$(MAKECMDGOALS)),)
+ifeq ($(VER),)
+$(error need VER)
+endif
+endif
+
+rel: gpfce.gpe out_gp2x/readme.txt out_gp2x/gpfce.man.txt out_gp2x/gpfce.png out_gp2x/background.png
+	zip -9 -j gpfce_v$(VER).zip $^ drivers/gp2x/mmuhack.o
+	zip -9 gpfce_v$(VER).zip fceultra
+
+

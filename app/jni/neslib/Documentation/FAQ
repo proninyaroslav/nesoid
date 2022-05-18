@@ -1,0 +1,45 @@
+FCE Ultra General User's FAQ
+ preliminary version
+------------------
+
+
+Q: Why doesn't the NSF <insert name here> work(correctly) on FCE Ultra?
+A: Some NSF rips are bad.  Some read from addresses that are not specified
+   in the NSF specifications, expecting certain values to be returned.
+   Others execute undocumented instructions that have no affect on
+   less-accurate software NSF players, but will cause problems on NSF players 
+   that emulate these instructions.  Also, the playback rate specified
+   in the NSF header is currently ignored, though I haven't encountered
+   any problems in doing this.
+
+
+Q: Why doesn't the game <insert name here> work(correctly) on FCE Ultra?
+A: Many factors can make a game not work on FCE Ultra:
+
+	- If the ROM image is in the iNES format(typically files that have 
+	  the extension "nes"), its header may be incorrect.  This 
+	  incorrectness may also be because of garbage in the 
+	  header.  Certain utilities used to put text in the reserved 
+	  bytes of the iNES header, then those reserved bytes were 
+	  later assigned functions.  FCE Ultra recognizes and 
+  	  automatically removes(from the ROM image in RAM, not on the 
+	  storage medium) SOME header junk.
+
+	  If the game has graphical errors while scrolling, chances are
+	  the mirroring is set incorrectly in the header.  
+	  
+	  You can try to edit the header with a utility(in the NES 
+	  utilities section at http://zophar.net ) or a hex editor.
+
+	- The on-cart hardware the game uses may not be emulated 
+	  correctly.
+
+	- Limitations of the ROM image format may prevent a game from
+	  being emulated correctly without special code to recognize that
+	  game.  This occurs quite often with many Koei MMC5(iNES mapper 5) 
+	  and MMC1(iNES mapper 1) games in the iNES format.  FCE Ultra identifies
+	  and emulates some of these games based on the ROM CRC32 value.
+
+	- The ROM image may be encrypted.  The author of SMYNES seems to
+	  have done this intentionally to block other emulators from 
+	  playing "SMYNES only" games. 

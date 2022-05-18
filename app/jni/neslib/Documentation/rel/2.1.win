@@ -1,0 +1,125 @@
+/******************************************************************************/
+/*  2.1)        Using FCE Ultra:                                              */
+/******************************************************************************/
+
+        After starting FCE Ultra, you'll probably want to load a game.  Do
+        this by going to File/Open.
+
+        Menu descriptions:
+
+        File
+         Open           - Loads a new game.                
+         Save State     - Saves the current NES state.
+         Load State     - Loads a saved NES state.
+         Log Sound As   - Logs sound to a file.  It will not work if sound
+                          is disabled.                               
+         Exit           - Exit the emulator.
+
+        NES
+         Reset          - Resets the virtual NES.
+         Power          - Power cycles the virtual NES.
+         Cheats         - Activates the cheat interface.  See "cheat.txt" for
+                          more details.
+
+        Config
+         Hide Menu      - Hides the menu.
+         Game Genie     - If checked, enable Game Genie emulation.
+                          Game Genie emulation will only begin or end when a new
+                          game is loaded.
+         PAL Emulation  - If checked, enable PAL emulation.  Changes take effect
+                          immediately, though I recommend resetting the virtual
+                          NES afterward PAL emulation is enabled or disabled.  
+         Directories    - Configure the directories that FCE Ultra will store
+                          its files in.
+         Input          - Enter input configuration dialog.
+                          Note that not all virtual devices are configurable.
+         Miscellaneous  - Enter miscellaneous configuration dialog.
+         Network Play   - Enter network play configuration dialog.
+         Palette        - Enter palette configuration dialog.
+         Sound          - Enter sound configuration dialog.
+          Sound enabled:
+                Sound emulation and output are enabled when this is checked.
+          Force 8-bit sound:
+                Forces 8-bit sound output.  Use only when absolutely
+                necessary(very rare).                        
+          Sample rate:
+                Specifies how many sound samples will be played back per
+                second.  Unless you know what you are doing, you probably
+                don't need to change this setting.
+          Use secondary sound buffer:
+                Uses a secondary sound buffer.  This option may be required
+                for sound to work with certain sound cards/devices.
+                Selecting "with global focus" will cause sound to be played
+                while FCE Ultra has lost window focus, but you will probably
+                also want to select "Active While Focus Lost" in the Config
+                menu as well, otherwise you will just get repeating sound
+                when FCE Ultra loses focus.
+          Length of sound buffer:
+                Specifies what length of sound(in milliseconds) should be
+                buffered by FCE Ultra.  DirectSound and the Windows kernel
+                may or may not cause a little more latency than what you
+                might expect(usually not any more than a few milliseconds),
+                depending on your setup.
+                Use larger values if you have sound problems such as popping
+                or gaps, though.  Larger values will increase the latency of
+                the sound, however.  Finally, larger values are ideal for
+                background music listening.
+          Volume:
+                Specifies the volume of FCE Ultra's sound output.  Setting
+                the volume too high MIGHT cause noticeable clipping on some
+                sounds(loud drums, for example), but don't let that possibility
+                stop you from experimenting.
+
+         Video          - Enter video configuration dialog.
+
+        Default Key Mapping:
+
+         For emulated Family BASIC Keyboard:
+          Enable/Disable Keyboard Input         Scroll Lock
+                (enabling emulated keyboard input will disable
+                 commands keys)
+          All emulated keys are mapped to the closest open key on the PC
+          keyboard, with a few exceptions.  The emulated "@" key is
+          mapped to the "`"(grave) key, and the emulated "kana" key
+          is mapped to the "Insert" key(in the 3x2 key block above the
+          cursor keys).
+
+         For emulated game pads:
+          Left Control             B
+          Left Alt                 A
+          Enter/Return             Start
+          Tab                      Select
+          Cursor Down              Down
+          Cursor Up                Up
+          Cursor Left              Left
+          Cursor Right             Right
+        
+         For emulated power pads(keys correspond to button locations on
+         side "B"):
+          O P [ ]
+          K L ; '
+          M , . /
+
+         For FDS games:
+          I                        Insert disk.
+          E                        Eject disk.
+          S                        Select disk/disk side.
+
+         For VS Unisystem games:
+          C                        Insert coin.
+          V                        Show/Hide dip switches.
+           1-8                      Toggle dip switches(when dip switches
+                                    are shown).
+
+         0-9                      Select save state.
+      
+         F5/F7                    Save/Load state.
+         F9                       Save screen snapshot.
+
+         F3                       Hide/Show menu.
+         F4                       Toggle between windowed/full screen modes.
+         F10                      Reset.
+         F11                      Power off/on.
+         F12                      Exit.
+
+

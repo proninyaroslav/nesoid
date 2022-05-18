@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:installLocation="preferExternal">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_label"
+        android:supportsRtl="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <activity
+            android:name="com.androidemu.nes.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name="CreateShortcuts"
+            android:label="@string/launcher_shortcut_name"
+            android:targetActivity="com.androidemu.nes.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity android:name="com.androidemu.nes.FileChooser" />
+        <activity
+            android:name="com.androidemu.nes.StateSlotsActivity" />
+        <activity android:name="com.androidemu.nes.KeyProfilesActivity" />
+        <activity android:name="com.androidemu.nes.HelpActivity" />
+        <activity
+            android:name="com.androidemu.nes.DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden" />
+        <activity
+            android:name="com.androidemu.nes.CheatsActivity"
+            android:process=":emulator" />
+        <activity
+            android:name="com.androidemu.nes.EmulatorSettings"
+            android:process=":emulator" />
+        <activity
+            android:name="com.androidemu.nes.EmulatorActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:process=":emulator"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.androidemu.nes.EmulatorService"
+            android:process=":emulator" />
+    </application>
+</manifest>

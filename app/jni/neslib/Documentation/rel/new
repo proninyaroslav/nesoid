@@ -1,0 +1,56 @@
+	*  Screen snapshots can now be taken while playing an NSF.
+	*  Saving screen snapshots will no longer corrupt the frame buffer.
+	*  Added many more games to the list of games that usually are found
+	   with bad iNES headers.
+	*  Fixed more network play bugs.  It should now work correctly(how
+	   many times have I said or implied that...).
+	*  The NSF player will now disable the FDS sound channel on song
+	   initialization(fixes a problem with the Zelda no Densetsu
+	   rip).
+	*  Reads from $4090 and $4092 while emulating the FDS will now return
+	   the current envelope settings.  Affects "Ai Senshi Nicole" 
+	   and "Bio Miracle Bokutte Upa", at least.
+	*  Merged a lot of pirate MMC3 multicart emulation code with the main
+	   MMC3 emulation code.
+	*  Added support for the MMC5's split-screen mode.  This fixes the
+	   introduction in "Uchuu Keibitai SDF".
+	*  Writes to $8000-$FFFF with D7 set during MMC1 emulation will
+	   cause the MMC1 mode register to be OR'd with $C.  This fixes
+	   "Robocop 3".
+	*  Replaced an MMC1 hack that I used to get "Bill and Ted's Excellent
+	   Video Game Adventure" to work with something more accurate.
+	*  Fixed the MMC5 read handler to return the data last on the data
+	   bus instead of $FF when a read occured to an unmapped address.
+	   This fixes the lockup problem in "Bandit Kings of Ancient China"
+	   and possibly other games.
+	*  Added support for the game "Ishin no Arashi" in the iNES format
+	   (I added an entry with its CRC32 value and the number of 8KB
+           WRAM banks it needs into the MMC5 WRAM size table).
+	*  Added support for MMC1 games in the iNES format with 16KB of RAM
+           via CRC32 comparisons(currently only Genghis Khan(USA), Romance
+	   of the 3 Kingdoms(USA), and Nobunaga's Ambition(USA and Japan) are 
+           recognized).
+	*  iNES mapper 1 now supports pageable CHR RAM if CHR ROM is not
+	   present.  Fixes "Family School".
+	*  Added support for iNES mappers 51 and 52.  Thanks to Kevin Horton
+	   for the information.
+	*  Modified MMC3(iNES mapper 4/118/119) IRQ counter emulation.  Fixes
+	   problems in "MegaMan 3", "Gun Nac", and the Japanese version of
+	   "Klax", but it *might* cause problems with other games.
+	*  Fixed an iNES mapper 32 emulation bug.  "Ai Sensei no Oshiete"
+	   works now.
+	*  Fixed iNES mapper 33/48 IRQ emulation.
+	*  Fixed iNES mapper 16 IRQ emulation.
+	*  Added support for "Famicom Jump 2" as iNES mapper 153.
+           If a good(as far as I can tell) dump is loaded, FCE Ultra will
+           automatically fix the mapper number.
+	*  The VS Unisystem bit in iNES headers is no longer recognized.
+	   Too many games have this bit set when it shouldn't be set.
+	   Now VS Unisystem games are recognized by CRC32 value.
+	*  Reads from $4015 no longer reset DMC IRQ.  This fixes the
+	   title screen of "Romancia".
+	*  PPU NMI now occurs a few cycles later.  Fixes the "BattleToads"
+	   lockup problem.
+	*  BRK emulation now sets the I flag.
+	*  Changed a few zero-page address mode functions to read directly
+	   from emulated RAM.

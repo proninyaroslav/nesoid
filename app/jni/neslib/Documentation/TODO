@@ -1,0 +1,60 @@
+*** First, things that are not on the TODO list(Don't bug me about these
+	things if you're an idiot.  I don't like listening to idiots.
+	If you are not an idiot, and you can make decent arguments for why
+	these should be on the TODO list, then you can bug me.).
+
+ Remappable command keys:  Too much work would be involved, demand isn't
+  very high, and I don't need this feature.  Maybe in the distant future, if
+  input devices have changed significantly and if FCE Ultra is still around.
+
+ High-level Game Genie support(like the RAM cheats):  This would be fairly
+  simple to do, after doing the RAM cheat stuff, but I think that FCE Ultra
+  already has too many ways to "cheat" and that this would just be code bloat.
+
+
+*** General Features:
+
+ Windows Port:
+  Support for command-line options(so that one crazy guy will quit bugging
+  me).
+
+ SDL Port:
+  Make the code better.
+  Add a GTK+ interface using GLADE.
+
+ Figure out a good way to add "turbo" button support and then do it.
+
+ Make default svgalib video mode a non-tweaked VGA mode.
+
+ Finish the software video blitting "library", add support for 2xsai, eagle,
+ interpolation, etc. effects.
+
+ Rewrite network play code.  Add security features(such as only allowing
+ connections from a specified ip address).
+
+
+*** Emulation:
+
+ Fix DPCM playback and IRQ at end of playback.
+
+ Improve the sound filters.  They work, but not very well.
+
+ Fix frame IRQ(if it even exists...) and $4017.
+
+ Fix some 6502 emulation bugs(undocumented opcodes might not be implemented 
+ correctly and I'm not sure if the IRQ flag latency is implemented correctly).
+
+ Fix MMC3 IRQ emulation.  Check if this fixes the PAL version of "Star Wars".
+
+ Figure out correct timing for when the PPU refresh address register is
+ updated by the PPU(for the next scanline).
+
+ Vertical blank period might be too short?  Or maybe something is wrong 
+ with my mapper 16 IRQ emulation code. Probably the latter.  
+ See SD Gundam Knight 3 or SD GK 2.
+
+ Sound frame count stuff on PAL games(is it correct?).
+ 
+ Fix FDS sound emulation.
+
+ Fix Zapper emulation(Chiller still doesn't always work correctly).

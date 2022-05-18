@@ -1,0 +1,60 @@
+CROSS	= 
+CC	= $(CROSS)gcc
+STRIP	= $(CROSS)strip
+TFLAGS  = -Winline -Izlib -DLSB_FIRST -DUNIX -DPSS_STYLE=1 -DHAVE_ASPRINTF -DZLIB -DFRAMESKIP -D_REENTRANT `sdl-config --cflags`
+RM	= rm -f
+B	= drivers/gp2x/
+
+DEBUG   = 1
+
+ifdef DEBUG
+TFLAGS	+= -ggdb
+LDRIVER	+= -ggdb
+NOSTRIP = 1
+else
+TFLAGS	+= -ftracer -fstrength-reduce -funroll-loops -fomit-frame-pointer -fstrict-aliasing -ffast-math
+TFLAGS	+= -O3 #-pg -fno-omit-frame-pointer
+LDRIVER	+= -O3 #-pg -fno-omit-frame-pointer
+endif
+
+#NOSTRIP = 1
+
+
+all:		fceu
+
+gpfce.gpe: fceu
+	cp fceu $@
+
+include zlib/Makefile
+
+OBJDRIVER	 = drivers/gp2x_test/minimal.o drivers/gp2x_test/throttle.o ${B}gp2x.o ${B}main.o \
+		${B}unix-netplay.o ${B}gp2x-sound.o ${B}gp2x-video.o ${B}usbjoy.o ${B}menu.o ${B}fonts.o ${B}readpng.o \
+		drivers/common/cheat.o drivers/common/config.o drivers/common/args.o drivers/common/vidblit.o ${UNZIPOBJS} \
+		ppu.o movie.o fceu098.o ppu098.o
+LDRIVER		+= -lm -lz -lpng `sdl-config --libs`
+
+OBJDRIVER += x6502.o
+
+x6502.o: x6502.c x6502.h ops.h fce.h sound.h dprintf.h
+
+include Makefile.base
+
+${B}main.o:		${B}main.c ${B}main.h ${B}usage.h ${B}input.c
+${B}gp2x.o:		${B}gp2x.c ${B}gp2x.h ${B}rev.h
+${B}throttle.o:         ${B}throttle.c ${B}main.h ${B}throttle.h
+ppu.o:			ppu.c ppu.h
+
+${B}rev.h: FORCE
+	@if [ -f $@ ]; then prevrev=`cat $@`; else prevrev="00"; fi; \
+	if [ "`which svn`" != "" ]; then \
+		rev=`svn update|tail -n 1|sed 's/.*\ \(.*\)\./\1/g'|sed "s/'//g"`; \
+	fi; \
+	if [ "$$rev"  = "" ]; then rev="0"; fi; \
+	if [ "$$rev" != "$$prevrev" ]; then \
+		echo "$$rev" > $@; \
+	fi
+
+.PHONY: FORCE
+
+include Makefile.common
+

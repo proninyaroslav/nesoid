@@ -1,0 +1,128 @@
+MMC5 Bankswitching
+by Kevin Horton
+--------------------
+
+5100:  Controls paging of RAM and ROM
+
+Bits: ???? ??xx
+
+For xx:
+
+00: 32K bankswitching.  Only 5117 can be used to control banks. 5114 thru
+     5116 have no effect.
+
+
+01: 16K bankswitching. Only 5115 and 5117 can be used to control banks.
+     5114 and 5116 have no effect.
+
+
+10: 8K/16K bankswitching. 5115-5117 are used.  5114 has no effect.
+
+11: 8K bankswitching. 5114-5117 are used.
+
+(See below for detailed description)
+
+--
+
+5113:  RAM page 6000-7FFF bank.  Lower 3 bits are used, for a possible
+        64K of WRAM. (Note more bits *may* be possible for more RAM.
+        This has not been confirmed yet).
+
+Bits: ???? ?xxx
+
+WRAM follows a certain convention, based on the style of MMC5 board used.
+8K and 32K carts are usually implemented with a single chip, while 16K
+carts use two 8K'ers.  This is important since enabling changes, and hence
+valid banks.
+
+for xxx:
+
+      8K         16K        32K        40K        64K
+
+0: bank 0     bank 0     bank 0     bank 0     bank 0
+1: bank 0     bank 0     bank 1     bank 1     bank 1
+2: bank 0     bank 0     bank 2     bank 2     bank 2
+3: bank 0     bank 0     bank 3     bank 3     bank 3
+4: open bus   bank 1     open bus   bank 4     bank 4
+5: open bus   bank 1     open bus   bank 4     bank 5
+6: open bus   bank 1     open bus   bank 4     bank 6
+7: open bus   bank 1     open bus   bank 4     bank 7
+
+Note that the 40K and 64K examples are hypothetical.  The first three,
+however *are* real and is what you find inside a real MMC5 cart.
+
+Also note, that 5114-5116 follow this identical convention, if set up
+to switch in RAM banks.
+
+--
+
+Bankswitching is a bit complicated.  This table should make things clearer.
+The numbers at the top are what you write to 5100 to select mode.
+
+Legend:
+
+-   = this has no effect
+--- = this register is not used, and writes to it are ignored
+R   = PRG ROM/WRAM select.  0=WRAM, 1=PRG ROM
+b   = bank bits
+
+
+
+5100:    00          01          10          11
+
+5114     ---         ---         ---      Rbbb bbbb
+5115     ---      Rbbb bbb-   Rbbb bbb-   Rbbb bbbb
+5116     ---         ---      Rbbb bbbb   Rbbb bbbb
+5117  -bbb bb--   -bbb bbb-   -bbb bbbb   -bbb bbbb
+
+
+Mode 00
+-------
+
+Only one 32K page can be selected.  The lower 2 bits of the desired bank
+are ANDed out.  writing 084h, 085h, 086h, and 087h to 5117 in this mode
+all result in selection of the same 32K.  No RAM is available in this mode.
+
+Mode 01
+-------
+
+There are two selectable 16K pages.  Similar to above, the lowest bit written
+is not used to select banks.  In this mode, writing to 5115 selects 16K
+at 8000-BFFF, and 5117 selects 16K at C000-FFFF. RAM can be enabled in this
+mode for 8000-BFFF.  If RAM is enabled for 8000-BFFF, remember that the
+lowest bank select bit is not used.
+
+Mode 10
+-------
+
+This is the oddest one.  There is one 16K selectable page, and two 8K
+selectable pages.  5115 selects the 16K page at 8000-BFFF, 5116 selects
+an 8K page at C000-DFFF, and 5117 selects an 8K page at E000-FFFF.
+RAM can be enabled for 8000-DFFF. (16K of RAM at 8000-BFFF via bit 7 of
+D115, and 8K of RAM at C000-DFFF via bit 7 of d116).  Note that RAM banking
+works the same as mode 01, above for the 16K bank.
+
+
+Mode 11
+-------
+
+There are 4 8K selectable pages. 5114 controls 8000-9FFF, etc. all the way
+up to 5117 that controls E000-FFFF.  The first 3 pages can use RAM, while
+the last page cannot.
+
+
+--
+
+WRAM write enable.
+
+5102, 5103
+
+To enable writing to RAM, 5102 must have 02h written to it, and 5103
+must have 01h written to it. If this is not the case, you can still
+*read* the RAM, but writes to it have no effect.  Supposidly only the
+lower two bits of 5102 and 5103 are checked, but I didn't verify this.
+I *did* however verify that setting the two registers to the above
+values allows writing.  If voltage goes out of tolerance (Read: you
+turn the power on/off) the RAM writing is disabled.  (To prevent
+corruption of saved-games during power cycling)
+

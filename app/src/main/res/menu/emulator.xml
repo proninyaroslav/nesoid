@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/menu_netplay_sync"
+			android:title="@string/netplay_sync" />
+
+	<item android:id="@+id/menu_load_state"
+			android:title="@string/load_state"
+			android:alphabeticShortcut="l" />
+
+	<item android:id="@+id/menu_save_state"
+			android:title="@string/save_state"
+			android:alphabeticShortcut="t" />
+
+	<item android:id="@+id/menu_settings"
+			android:title="@string/settings" />
+
+	<item android:id="@+id/menu_change_disk"
+			android:title="@string/change_disk"
+			android:visible="false" />
+
+	<item android:id="@+id/menu_fast_forward"
+			android:title="@string/fast_forward" />
+
+	<item android:id="@+id/menu_cheats"
+			android:title="@string/cheats" />
+
+	<item android:id="@+id/menu_netplay_connect"
+			android:title="@string/netplay_connect" >
+		<menu>
+			<item android:id="@+id/menu_bluetooth_server"
+					android:title="@string/bluetooth_server"/>
+			<item android:id="@+id/menu_bluetooth_client"
+					android:title="@string/bluetooth_client"/>
+			<item android:id="@+id/menu_wifi_server"
+					android:title="@string/wifi_server"/>
+			<item android:id="@+id/menu_wifi_client"
+					android:title="@string/wifi_client"/>
+		</menu>
+	</item>
+
+	<item android:id="@+id/menu_netplay_disconnect"
+			android:title="@string/netplay_disconnect" />
+
+	<item android:id="@+id/menu_reset"
+			android:title="@string/reset" />
+
+	<item android:id="@+id/menu_power"
+			android:title="@string/power" />
+
+	<item android:id="@+id/menu_screenshot"
+			android:title="@string/screenshot" />
+
+	<item android:id="@+id/menu_close"
+			android:title="@string/close"  />
+</menu>

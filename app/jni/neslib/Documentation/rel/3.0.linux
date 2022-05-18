@@ -1,0 +1,37 @@
+/******************************************************************************/
+/*  3.0)        Platform Specific Notes                                       */
+/******************************************************************************/
+
+        1.  FCE Ultra uses SVGAlib, so you'll obviously need to have it
+        installed.
+
+        2.  Be careful when using the non-VGA video modes(such as 640x480).
+        SVGAlib doesn't always handle virtual terminal switching well when
+        one of these modes is being used.  Also, since FCE Ultra enables a
+        a linear frame buffer for these modes, heed this warning from
+        the SVGAlib documentation:
+
+               Furthermore, some cards (Cirrus) just enable  this  buffer
+               at  a  fixed hardware address.  For Cirrus it is mapped at
+               14MB so you should never used it if  you  have  more  than
+               14MB  of  memory (But how does an application know?).  The
+               Mach32 support for this is smarter. It makes this  feature
+               only available when it is safe to be used.
+
+        3.  FCE Ultra must be run as root in order to get access to the
+        VGA hardware.  SVGAlib will drop root privileges if you are running
+        the program as a normal user and the suid root bit is set and the
+        executable is owned by root. Example:
+                chown root fceu ; chmod 4755 fceu
+        Make sure you have the latest stable release of SVGAlib, though.
+
+        4.  FCE Ultra will save all data(state saves/screen snapshots) in
+        ~/.fceultra, so make sure your "HOME" environment variable is set
+        correctly.
+
+        If you believe FCE Ultra is too slow, you can try the following:
+         * Kill some of the other processes.
+         * Disable sound emulation.
+	 * Raise the priority of FCE Ultra with the 'nice' command. 
+	   Ex:  nice -n -20 ./fceu
+

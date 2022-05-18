@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The name of the application. -->
+    <string name="app_label">Nesoid</string>
+    <string name="emulator_service_running">Nesoid запущен</string>
+    <string name="launcher_shortcut_name">Игра NES</string>
+
+    <string name="menu_edit">Редактировать</string>
+    <string name="menu_delete">Удалить</string>
+
+    <!-- File chooser -->
+    <string name="title_select_rom">Выбрать ROM</string>
+    <string name="no_files_in_folder">Нет подходящих файлов в этой папке.</string>
+    <string name="invalid_dir">Неверная папка</string>
+    <string name="refresh">Обновить</string>
+    <string name="rom_gripper_not_found">ROM Gripper не найден</string>
+
+    <string name="shortcut_name">Имя ярлыка</string>
+    <string name="search_roms">"Поиск ROM'ов"</string>
+    <string name="help">Помощь</string>
+    <string name="load_rom_failed">"Ошибка при загрузке ROM'а. Пожалуйста выберите другой файл."</string>
+    <string name="rom_not_supported">"Формат ROM'а не поддерживается."</string>
+    <string name="replace_game_title">Заменить игру</string>
+    <string name="replace_game_message">Начать новую игру? <b>Текущая игра не будет сохранена.</b></string>
+    <string name="quit_game_title">Закрыть игру</string>
+    <string name="load_state_title">Загрузить состояние</string>
+    <string name="save_state_title">Сохранить состояние</string>
+
+    <!-- state slots -->
+    <string name="slot_quick">Быстрый слот</string>
+    <string name="slot_nth">Слот %1$d</string>
+    <string name="slot_empty">&lt;пусто&gt;</string>
+
+    <!-- Menu -->
+    <string name="settings">Настройки</string>
+    <string name="reset">Сброс</string>
+    <string name="power">Питание</string>
+    <string name="change_disk">Сменить диск</string>
+    <string name="disk_side">Диск %1$d Сторона %2$c</string>
+    <string name="netplay_connect">Мультиплеер</string>
+    <string name="netplay_disconnect">Разъединено</string>
+    <string name="wifi_server">Wi-Fi (Сервер)</string>
+    <string name="wifi_client">Wi-Fi (Клиент)</string>
+    <string name="bluetooth_server">Bluetooth (Сервер)</string>
+    <string name="bluetooth_client">Bluetooth (Клиент)</string>
+    <string name="netplay_sync">Синхронизация</string>
+    <string name="fast_forward">Ускорить</string>
+    <string name="no_fast_forward">Замедлить</string>
+    <string name="screenshot">Скриншот</string>
+    <string name="screenshot_saved">Скриншот сохранен в Галерее.</string>
+    <string name="save_state">Сохранить</string>
+    <string name="load_state">Загрузить</string>
+    <string name="cheats">Читы</string>
+    <string name="close">Закрыть</string>
+
+    <string name="connection_closed">Разъединено.</string>
+    <string name="connect_failed">Соединение не удалось.</string>
+    <string name="protocol_incompatible">Несовместимый протокол. Пожалуйста обновите оба устройства до последних версий!</string>
+    <string name="wifi_not_available">Сеть Wi-Fi не доступна!</string>
+    <string name="wifi_server_listening">Ожидаю подключения:\n\nIP: %1$s\nПорт: %2$d</string>
+    <string name="client_connecting">Соединяюсь с устройством…</string>
+    <string name="bluetooth_server_listening">Ожидаю подключения…\n\nНажмите здесь, чтобы сделать устройство видимым.</string>
+    <string name="ip_address">IP:</string>
+    <string name="port">Порт:</string>
+    <string name="invalid_ip_address">Неверный IP адрес.</string>
+    <string name="invalid_port">Неверный порт.</string>
+
+    <string name="key_profiles">Профили управления</string>
+    <string name="new_profile">Новый профиль</string>
+    <string name="new_profile_title">Имя профиля</string>
+    <string name="new_profile_error">Ошибка при создании нового профиля.</string>
+    <string name="load_profile">Загрузить профиль</string>
+    <string name="save_profile">Сохранить профиль</string>
+
+    <!--  DeviceListActivity -->
+    <string name="scanning">Поиск устройств…</string>
+    <string name="select_device">Выберите устройство для соединения</string>
+    <string name="none_paired">Устройства не соединены</string>
+    <string name="none_found">Устройства не найдены</string>
+    <string name="title_paired_devices">Сопряжённые устройства</string>
+    <string name="title_other_devices">Другие доступные устройства</string>
+    <string name="button_scan">Поиск устройств</string>
+
+    <!-- Cheats -->
+    <string name="no_cheats_help">"Вы еще не вводили читы.\n\nДля добавления нажмите <font fgcolor="#ffffffff"><b>Меню</b></font>, затем <font fgcolor="#ffffffff"><b>Новый чит</b></font>. Чит-коды могут:
+        \n<li><font fgcolor="#ffffffff"><b>Game Genie (например SLAIUZ)</b></font></li>"
+    </string>
+    <string name="new_cheat">Новый чит</string>
+    <string name="cheat_code">Код:</string>
+    <string name="cheat_name">Имя (опционально):</string>
+    <string name="invalid_cheat_code">Неверный чит-код!</string>
+
+    <!-- Settings -->
+    <string name="audio_video_settings">Настройки звука и видео</string>
+    <string name="audio_settings">Настройки звука</string>
+    <string name="enable_sound">Включить звук</string>
+    <string name="sound_volume">Громкость</string>
+    <string name="video_settings">Настройки видео</string>
+    <string name="scaling_mode">Режим масштабирования</string>
+    <string name="aspect_ratio">Соотношение сторон</string>
+    <string name="fast_forward_speed">Множитель \"Ускорения\"</string>
+    <string name="frame_skip_settings">Настройки пропуска кадров</string>
+    <string name="frame_skip_mode">Режим пропуска кадров</string>
+    <string name="max_frame_skips">Максимальный пропуск кадров</string>
+    <string name="max_frame_skips_summary">Максимальное количество последовательных пропусков кадров</string>
+    <string name="refresh_rate">Частота обновления экрана</string>
+    <string name="refresh_rate_summary">Владельцам MOTO Droid 2.1 необходимо поставить значение 30!</string>
+    <string name="accurate_rendering">Точный рендеринг</string>
+    <string name="accurate_rendering_summary">Более точное визуальное отображение (медленнее)</string>
+    <string name="accurate_rendering_prompt">Изменения всупят в силу после перезапуска игры</string>
+    <string name="input_settings">Настройки управления</string>
+    <string name="second_controller">Второе устройство</string>
+    <string name="second_controller_summary">Для использования светового пистолета необходимо отключить виртуальную клавиатуру!</string>
+    <string name="key_mappings">Переназначение клавиш</string>
+    <string name="key_mappings_summary">Назначение игровых кнопок на кнопки телефона</string>
+    <string name="gamepad_1">Джойстик 1</string>
+    <string name="gamepad_2">Джойстик 2</string>
+    <string name="shortcut_keys">Быстрые кнопки</string>
+    <string name="quick_load">Быстрая загрузка</string>
+    <string name="quick_save">Быстрое сохранение</string>
+    <string name="vkeypad_settings">Настройки виртуальной клавиатуры</string>
+    <string name="vkeypad_settings_summary">Установки наэкранной клавиатуры</string>
+    <string name="enable_vibrator">Вибрация при нажатии</string>
+    <string name="enable_vkeypad">Виртуальная клавиатура</string>
+    <string name="multitouch_unsupported">Этот телефон не поддерживает мультитач!</string>
+    <string name="dpad_4way">"Отключить диагонали D-pad'а"</string>
+    <string name="dpad_deadzone">"\"Мертвая зона\" D-pad'а"</string>
+    <string name="two_buttons_press">Нажатие двух кнопок</string>
+    <string name="in_between_press">Промежуточное нажатие</string>
+    <string name="in_between_press_summary">Нажмите между двумя кнопками для симуляции нажатия их вместе</string>
+    <string name="point_size_press">Размер</string>
+    <string name="point_size_press_summary">Размер точки прикосновения (работает не на всех устройствах)</string>
+    <string name="point_size_press_threshold">Выберите размер</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="vkeypad_size">Размер кнопок управления</string>
+    <string name="vkeypad_transparency">Прозрачность кнопок управления</string>
+    <string name="hide_controls">Скрыть кнопки управления</string>
+    <string name="hide_dpad">Скрыть D-pad</string>
+    <string name="hide_buttons">Скрыть A/B</string>
+    <string name="hide_extra_buttons">Скрыть A/B (turbo)</string>
+    <string name="disable_extra_buttons">Отключить A/B (turbo)</string>
+    <string name="hide_select_start">Скрыть select/start</string>
+    <string name="vkeypad_layout">Расположение D-pad + кнопок</string>
+    <string name="layout_margin">Отступ</string>
+    <string name="enable_trackball">Трекбол как D-pad</string>
+    <string name="trackball_sensitivity">Чувствительность трекбола</string>
+    <string name="enable_sensor">Сенсор как влево/вправо</string>
+    <string name="sensor_sensitivity">Чувствительность сенсора</string>
+    <string name="netplay_settings">Мультиплеер</string>
+    <string name="max_frames_ahead">Максимальное увеличение кадров</string>
+    <string name="max_frames_ahead_summary">Значения кроме 0 могут вызвать проблемы с синхронизацией!</string>
+    <string name="auto_sync_client">Авто синхронизация (Клиент)</string>
+    <string name="auto_sync_client_interval">Интервал авто синхронизации</string>
+    <string name="other_settings">Дополнительно</string>
+    <string name="cheating">Читерство</string>
+    <string name="enable_cheats">Включить читы</string>
+    <string name="enable_game_genie">Включить Game Genie</string>
+    <string name="bios">BIOS</string>
+    <string name="game_genie_rom">Game Genie</string>
+    <string name="fds_rom">Famicom Disk System</string>
+    <string name="user_settings">Пользовательские настройки</string>
+    <string name="flip_screen">Повернуть экран</string>
+    <string name="flip_screen_summary">Поворот альбомной ориентации на 180°. Полезно, если D-pad находится справа, но вы хотите, чтобы он был слева.</string>
+    <string name="full_screen_mode">Полноэкранный режим</string>
+    <string name="full_screen_mode_summary">Скрывать область уведомлений</string>
+    <string name="orientation">Ориентация</string>
+    <string name="orientation_summary">Ориентация экрана при игре</string>
+    <string name="quick_load_on_start">Быстрая загрузка при открытии</string>
+    <string name="quick_load_on_start_summary">"Автоматическая загрузка сохраненного состояния при открытии ROM'а"</string>
+    <string name="use_input_method">Использовать джойстик</string>
+    <string name="use_input_method_summary">Включите, для использования специального Bluetooth джойстика</string>
+    <string name="app_about">О эмуляторе Nesoid</string>
+    <string name="about">О программе</string>
+    <string name="github">GitHub</string>
+
+    <string name="press_key_prompt">Нажмите кнопку на клавиатуре…</string>
+    <string name="key_none">&lt;нет></string>
+    <string name="key_unknown">&lt;неизвесно></string>
+    <string name="key_clear">Сброс</string>
+
+    <string name="gamepad_up">Вверх</string>
+    <string name="gamepad_down">Вниз</string>
+    <string name="gamepad_left">Влево</string>
+    <string name="gamepad_right">Вправо</string>
+    <string name="gamepad_up_left">Вверх+Влево</string>
+    <string name="gamepad_up_right">Вверх+Вправо</string>
+    <string name="gamepad_down_left">Вниз+Влево</string>
+    <string name="gamepad_down_right">Вниз+Вправо</string>
+    <string name="gamepad_select">Выбор</string>
+    <string name="gamepad_start">Старт</string>
+    <string name="gamepad_A">Кнопка A</string>
+    <string name="gamepad_B">Кнопка B</string>
+    <string name="gamepad_A_turbo">Кнопка A (turbo)</string>
+    <string name="gamepad_B_turbo">Кнопка B (turbo)</string>
+    <string name="gamepad_AB">Кнопка A&amp;B</string>
+
+    <string-array name="exit_game_options">
+        <item>Вернуться к игре</item>
+        <item>Сохранить и закрыть</item>
+        <item>Закрыть</item>
+    </string-array>
+
+    <string-array name="scaling_mode_entries">
+        <item>Растянутый</item>
+        <item>Пропорциональный</item>
+        <item>2x</item>
+        <item>Оригинальный</item>
+    </string-array>
+
+    <string-array name="aspect_ratio_entries">
+        <item>По умолчанию</item>
+        <item>4:3 (TV)</item>
+        <item>5:4</item>
+        <item>16:10</item>
+        <item>16:9</item>
+    </string-array>
+
+    <string-array name="frame_skip_entries">
+        <item>Автоматически</item>
+        <item>Вручную</item>
+    </string-array>
+
+    <string-array name="refresh_rate_entries">
+        <item>По умолчанию</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+
+    <string-array name="second_controller_entries">
+        <item>Нет</item>
+        <item>Световой пистолет</item>
+        <item>Джойстик</item>
+    </string-array>
+
+    <string-array name="vkeypad_size_entries">
+        <item>Большой</item>
+        <item>Средний</item>
+        <item>Маленький</item>
+    </string-array>
+
+    <string-array name="vkeypad_layout_entries">
+        <item>Низ + Низ</item>
+        <item>Низ + Верх</item>
+        <item>Верх + Низ</item>
+        <item>Верх + Верх</item>
+    </string-array>
+
+    <string-array name="orientation_entries">
+        <item>Автоопределение</item>
+        <item>Альбомная</item>
+        <item>Портретная</item>
+    </string-array>
+
+    <string-array name="auto_sync_client_entries">
+        <item>10 секунд</item>
+        <item>20 секунд</item>
+        <item>30 секунд</item>
+        <item>45 секунд</item>
+        <item>1 минута</item>
+    </string-array>
+</resources>

@@ -1,0 +1,266 @@
+NTSC PPU timing
+by Samus Aran (livingmonolith@hotmail.com)
+date: Sept. 25th, Y2K
+
+This weekend, I setup an experiment with my NTSC NES MB & my PC so's I could 
+RE the PPU's timing. What I did was (using a PC interface) analyse the 
+changes that occur on the PPU's address and data pins on every rising & 
+falling edge of the PPU's clock. I was not planning on removing the PPU from 
+the motherboard (yet), so basically I just kept everything intact (minus the 
+stuff I added onto the MB so I could monitor the PPU's signals), and popped 
+in a game, so that it would initialize the PPU for me (I used DK classics, 
+since it was only taking somthing like 4 frames before it was turning on the 
+background/sprites).
+
+The only change I made was taking out the 21 MHz clock generator circuitry. 
+To replace the clock signal, I connected a port controlled latch to the 
+NES's main clock line instead. Now, by writing a 0 or a 1 out to an PC ISA 
+port of my choice (I was using $104), I was able to control the 21 MHz 
+clockline of the NES. After I would create a rise or a fall on the NES's 
+clock line, I would then read in the data that appeared on the PPU's address 
+and data pins, which included monitoring what PPU registers the game 
+read/wrote to (& the data that was read/written).
+
+My findings:
+
+- The PPU makes NO external access to name or character tables, unless the 
+background or sprites are enabled. This means that the PPU's address and 
+data busses are dead while in this state.
+
+- Because the PPU's palette RAM is internal to it, the PPU has multiport 
+access to it, and therefore, instant access to it at all times (this is why 
+reading palette RAM via $2007 does not require a throw-away read). This is 
+why when a scanline is being rendered, never does the PPU put the palette 
+address on it's bus; it's simply unneccessary. Additionally, when the 
+programmer accesses palette RAM via $2006/7, the palette address accessed 
+actually does show up on the PPU's external address bus, but the PPU's /R & 
+/W flags are not activated. This is required; to prevent writing over name 
+table data falling under the approprite mirrored area. I don't know why 
+Nintendo didn't just devote an exclusive area for palette RAM, like it did 
+for sprite RAM.
+
+- Sprite DMA is 6144 clock cycles long (or in CPU clock cycles, 6144/12). 
+256 individual transfers are made from CPU memory to a temp register inside 
+the CPU, then from the CPU's temp reg, to $2004.
+
+- One scanline is EXACTLY 1364 cycles long. In comparison to the CPU's 
+speed, one scanline is 1364/12 CPU cycles long.
+
+- One frame is EXACTLY 357368 cycles long, or EXACTLY 262 scanlines long.
+
+
+Sequence of pixel rendering
+---------------------------
+
+External PPU memory is accessed every 8 clock cycles by the PPU when it's 
+drawing the background. Therefore, the PPU will typically access external 
+memory 170 times per scanline. After the 170th fetch, the PPU does nothing 
+for 4 clock cycles (except in the case of a 1360 clock cycle scanline (more 
+on this later)), and thus making the scanline up of 1364 cycles.
+
+	accesses
+	--------
+
+	  1 thru 128:
+
+		1. Fetch 1 name table byte
+		2. Fetch 1 attribute table byte
+		3. Fetch 2 pattern table bitmap bytes
+
+		This process is repeated 32 times (32 tiles in a scanline).
+
+		This is when the PPU retrieves the appropriate data from PPU memory for 
+rendering the background. The first background tile fetched here is actually 
+the 3rd to be drawn on the screen (the background data for the first 2 tiles 
+to be rendered on the next scanline are fetched at the end of the scanline 
+prior to this one).
+
+In one complete cycle of fetches (4 fetches, or 32 cycles), the PPU renders 
+or draws 8 pixels on the screen. However, this does not suggest that the PPU 
+is always drawing on-screen results while background data is being fetched. 
+There is a delay inside the PPU from when the first background tile is 
+fetched, and when the first pixel to be displayed on the screen is rendered. 
+It is important to be aware of this delay, since it specifically relates to 
+the "sprite 0 hit" flag's timing. I currently do not know what the delay 
+time is (as far as clock cycles go).
+
+		Note that the PPU fetches a nametable byte for every 8 horizontal pixels 
+it draws. It should be understood that with some custom cartridge hardware, 
+the PPU's color area could be increased (more about this at the end of this 
+document).
+
+		It is also during this time that the PPU evaluates the "Y coordinate" 
+entries of all 64 sprites (starting with sprite 0) in sprite RAM, to see if 
+the sprites are within range (to be drawn on the screen) FOR THE NEXT 
+SCANLINE. For sprite entries that have been found to be in range, they (that 
+is, the sprite's nametable, and x coordinate bytes, attribute (5 bits) and 
+fine y scroll (3 or 4 bits, depending on bit 5 of $2000 ("sprite size")) 
+bits) accumulate into a part of PPU memory called the "sprite temporary 
+memory", which is big enough to hold the data for up to 8 sprites. If 8 
+sprites have accumulated into the temporary memory and the PPU is still 
+finding more sprites in range for drawing on the next scanline, then the 
+sprite data is ignored (not loaded into the sprite temporary memory), and 
+the PPU raises a flag (bit 5 of $2002) indicating that it is going to be 
+dropping sprites for the next scanline.
+
+	129 thru 160:
+
+		1. Fetch 2 garbage name table bytes
+		2. Fetch 2 pattern table bitmap bytes for applicable sprites ON THE NEXT 
+SCANLINE
+
+		This process is repeated 8 times.
+
+		This is the period of time when the PPU retrieves the appropriate pattern 
+table data for the sprites to be drawn on the next scanline. Where the PPU 
+fetches pattern table data for an individual sprite depends on the nametable 
+byte, and fine y scroll bits of a single sprite entry in the sprite 
+temporary memory, and bits 3 and 5 of $2000 ("sprite pattern table select" 
+and "sprite size" bits, respectively). The fetched pattern table data (which 
+is 2 bytes), plus the associated 5 attribute bytes, and the x coordinate 
+byte in sprite temporary memory are then loaded into a part of the PPU 
+called the "sprite buffer memory". This memory area again, is large enough 
+to hold the contents for 8 sprites. The makeup of one sprite memory cell 
+here is composed of 2 8-bit shift registers (the fetched pattern table data 
+is loaded in here, where it will be serialized at the appropriate time), a 
+5-bit latch (which holds the attribute data for a sprite), and a 8-bit down 
+counter (this is where the x coordinate is loaded). The counter is 
+decremented every time the PPU draws a pixel on screen, and when the counter 
+reaches 0, the pattern table data in the shift registers will start to 
+serialize, and be drawn on the screen.
+
+		Even if no sprites exist on the next scanline, a pattern table fetch takes 
+place.
+
+		Although the fetched name table data is thrown away, I still can't make 
+much sense out of the name table address accesses the PPU makes during this 
+time. However, the address does seem to relate to the first name table tile 
+to be rendered on the screen.
+
+		It should also be noted that because this fetch is required for sprites on 
+the next line, it is neccessary for a garbage scanline to exist prior to the 
+very first scanline to be actually rendered, so that sprite RAM entries can 
+be evaluated, and the appropriate bitmap data retrieved.
+
+		 Finally, it would appear to me that the PPU's 8 sprite/scanline 
+bottleneck exists clearly because the PPU could only find the time in one 
+scanline to fetch the pattern bitmaps for 8 sprites. However, why the PPU 
+doesn't attempt to access pattern table data in the time when it fetches 2 
+garbage name table bytes is a good question.
+
+	161 thru 168:
+
+		1. Fetch 1 name table byte
+		2. Fetch 1 attribute table byte
+		3. Fetch 2 pattern table bitmap bytes
+
+		This process is repeated 2 times.
+
+		It is during this time that the PPU fetches the appliciable background 
+data for the first and second tiles to be rendered on the screen for the 
+next scanline. The rest of tiles (3..128) are fetched at the beginning of 
+the following scanline.
+
+	169 thru 170:
+
+		1. Fetch 1 name table byte
+
+		This process is repeated 2 times.
+
+		I'm unclear of the reason why this particular access to memory is made. 
+The nametable address that is accessed 2 times in a row here, is also the 
+same nametable address that points to the 3rd tile to be rendered on the 
+screen (or basically, the first nametable address that will be accessed when 
+the PPU is fetching background data on the next scanline).
+
+
+	After memory access 170, the PPU simply rests for 4 cycles (or the 
+equivelant of half a memory access cycle) before repeating the whole 
+pixel/scanline rendering process. If the scanline being rendered is the very 
+first one on every second frame, then this delay simply doesn't exist.
+
+
+Sequence of line rendering
+--------------------------
+
+	1. Starting at the instant the VINT flag is pulled down (when a NMI is 
+generated), 20 scanlines make up the period of time on the PPU which I like 
+to call the VINT period. During this time, the PPU makes NO access to it's 
+external memory (i.e. name / pattern tables, etc.).
+
+	2. After 20 scanlines worth of time go by (since the VINT flag was set), 
+the PPU starts to render scanlines. Now, the first scanline it renders is a 
+dummy one; although it will access it's external memory in the same sequence 
+it would for drawing a valid scanline, the fetched background data is thrown 
+away, and the places that the PPU accesses name table data is unexplainable 
+(for now).
+
+IMPORTANT! this is the only scanline that has variable length. On every 
+second rendered frame, this scanline is only 1360 cycles. Otherwise it's 
+1364.
+
+	3. after rendering 1 dummy scanline, the PPU starts to render the actual 
+data to be displayed on the screen. This is done for 240 scanlines, of 
+course.
+
+	4. after the very last rendered scanline finishes, the PPU does nothing for 
+1 scanline (i.e. makes no external memory accesses). When this scanline 
+finishes, the VINT flag is set, and the process of drawing lines starts all 
+over again.
+
+This makes a total of 262 scanlines. Although one scanline is slightly 
+shorter on every second rendered frame (4 cycles), I don't know if this 
+feature is neccessary to implement in emulators, since it only makes 1/3 a 
+CPU cycle difference per frame (and there's NO way that a game could take 
+into account 1/3 of a CPU cycle).
+
+
+Food for thought
+----------------
+
+What's important to remember about the NES's 2C02 or picture proecssing unit 
+(hereon PPU) is that all screen data is fetched & drawn on a real-time 
+basis. For example, let's consider how the PPU draws background tiles.
+
+We know that one name table byte is associated with an 8x8 cluster of pixels 
+(and therefore, 16 bytes worth of pattern bitmap data, plus 2 attribute 
+bits). Therefore, it would make sense for the PPU to only have to fetch a 
+name table byte once for each 8x8 pixel array it draws (one tile), and 1 
+attribute byte fetch for every 4x4 tile matrix that it draws. However, since 
+the PPU always draws one complete scanline before drawing the next, The PPU 
+will actually fetch the same name table byte 8 times, once each scanline at 
+the appropriate x coordinate. Since these name table address access reads 
+are redundant, with some custom cartridge hardware, it would be possible to 
+make the PPU appear as if it had background tiles as small as 8x1 pixels!
+
+Additionally, an attribute table byte is fetched from name table RAM once 
+per 2 fetched pattern bitmap bytes (or, every 8 pixels worth of pattern 
+bitmap data). This is useful information to keep in mind, for with some 
+custom cartridge hardware, this would allow the NES's PPU to appear to have 
+an effective color area as small as of 8*1 pixels (!), where only the 8 
+pixels are limited to having 4 exclusive colors, which, is *alot* better 
+than the PPU's default color area of 16x16 pixels.
+
+So basically, what I'm getting at here, is that the PPU has absolutely NO 
+memory whatsoever of what it rendered last scanline, and therefore all data 
+must be processed/evaluated again, whether it's name table accesses, 
+attribute table accesses, or even it's internal sprite RAM accesses.
+
+What's good, and what's bad about the way the PPU draws it's pictures:
+
+What's good about it is that it makes the PPU a hell of alot more versatile, 
+provided you have the appropriate hardware to assist in the improvement of 
+the PPU's background drawing techniques (MMC5 comes to mind). Also, by doing 
+background rendering in the real time, the PPU complexity is less, and less 
+internal temporary registers are required.
+
+What's bad about it is that it eats up memory bandwidth like it's going out 
+of style. When the PPU is rendering scanlines, the PPU is accessing the VRAM 
+every chance it gets, which takes away from the time that the programmer 
+gets to access the VRAM. In contrast, if redundantly loaded data (like 
+attribute bytes) were kept in internal PPU RAM, this would allow some time 
+for the PPU to allow access to it's VRAM.
+
+All in all though, Nintendo engineered quite a cost effective, versatile 
+graphic processor. Now, if only they brought the 4 expansion pins on the PPU 
+out of the deck!

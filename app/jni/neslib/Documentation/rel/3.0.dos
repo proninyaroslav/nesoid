@@ -1,0 +1,19 @@
+/******************************************************************************/
+/*  3.0)        Platform Specific Notes                                       */
+/******************************************************************************/
+
+        FCE Ultra's base directory is the directory in which the executable
+        is located.
+
+        Sound Blaster sound output requires that the 'BLASTER' environment
+        variable is set.  To set it(permanently), add the following line
+        to your autoexec.bat file:
+
+        set BLASTER=A240 I5 D1 H7
+
+        Where 240(hexadecimal) is the Sound Blaster's base I/O address, 5
+        is the IRQ number, 1 is the 8-bit DMA channel, and 7 is the 16-bit
+	DMA channel(if applicable).  
+			*DO NOT GUESS THE SETTINGS*  
+	Invalid settings can result in very bad things happening.
+

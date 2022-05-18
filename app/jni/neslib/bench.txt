@@ -1,0 +1,21 @@
+@200
+
+fsa / fs0
+
+Kage 25/48
+smb 30/55
+
+--
+v03+
+smb 97-98
+bm 87-88
+kage 83-84
+cvn3 ~88
+
+--
+v03+merge
+smb 95-96
+bm 86-87
+kage 82-83
+grad 72-73
+

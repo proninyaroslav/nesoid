@@ -1,0 +1,6 @@
+drivers/common/cheat.o:         drivers/common/cheat.c drivers/common/cheat.h
+drivers/common/config.o:        drivers/common/config.c drivers/common/config.h
+drivers/common/args.o:          drivers/common/args.c drivers/common/args.h
+drivers/common/unixdsp.o:       drivers/common/unixdsp.c drivers/common/unixdsp.h
+drivers/common/videblit.o:      drivers/common/vidblit.c drivers/common/vidblit.h
+

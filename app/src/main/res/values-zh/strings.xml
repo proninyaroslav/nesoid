@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- The name of the application. -->
+    <string name="app_label">Nes模拟器</string>
+    <string name="emulator_service_running">Nes模拟器正在运行</string>
+    <string name="launcher_shortcut_name">NES 游戏</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_delete">删除</string>
+
+    <!-- File chooser -->
+    <string name="title_select_rom">选择游戏</string>
+    <string name="no_files_in_folder">此目录没有可读取的文件</string>
+    <string name="invalid_dir">无效目录</string>
+    <string name="refresh">刷新</string>
+    <string name="shortcut_name">快捷名称</string>
+    <string name="search_roms">搜索ROM</string>
+    <string name="help">帮助</string>
+    <string name="load_rom_failed">游戏载入失败，请选择其他游戏文件</string>
+    <string name="rom_not_supported">不支持此类别游戏文件</string>
+    <string name="replace_game_title">替换游戏</string>
+    <string name="replace_game_message">当前游戏进度将会丢失，是否重新开始游戏？</string>
+    <string name="quit_game_title">关闭游戏</string>
+    <string name="load_state_title">读取进度</string>
+    <string name="save_state_title">保存进度</string>
+
+    <!-- state slots -->
+    <string name="slot_quick">快速存档</string>
+    <string name="slot_nth">存档 %1$d</string>
+    <string name="slot_empty">&lt;空的></string>
+
+    <!-- Menu -->
+    <string name="settings">常规设置​​​​</string>
+    <string name="reset">重新开始</string>
+    <string name="power">电源开关</string>
+    <string name="change_disk">替换游戏</string>
+    <string name="disk_side">游戏 %1$d 游戏 %2$c</string>
+    <string name="netplay_connect">联网对战</string>
+    <string name="netplay_disconnect">断开连接</string>
+    <string name="wifi_server">Wi-Fi (服务端)</string>
+    <string name="wifi_client">Wi-Fi (客户端)</string>
+    <string name="bluetooth_server">蓝牙 (服务端)</string>
+    <string name="bluetooth_client">蓝牙 (客户端)</string>
+    <string name="netplay_sync">同步</string>
+    <string name="fast_forward">游戏加速</string>
+    <string name="no_fast_forward">常规速度</string>
+    <string name="screenshot">屏幕截图</string>
+    <string name="screenshot_saved">截图文件已保存到图库中</string>
+    <string name="save_state">保存进度</string>
+    <string name="load_state">载入进度</string>
+    <string name="cheats">作弊</string>
+    <string name="close">关闭</string>
+    <string name="connection_closed">已断开远程连接</string>
+    <string name="connect_failed">远程连接失败</string>
+    <string name="protocol_incompatible">协议不兼容！请将两个终端更新到最新版本</string>
+    <string name="wifi_not_available">Wi-Fi 网络不可用！</string>
+    <string name="wifi_server_listening">"正在等候连接到:IP: %1$s端口: %2$d"</string>
+    <string name="client_connecting">正在连接设备...</string>
+    <string name="bluetooth_server_listening">"正在等候连接...点击这里使这个装置可见"</string>
+    <string name="ip_address">IP:</string>
+    <string name="port">端口:</string>
+    <string name="invalid_ip_address">IP 地址无效</string>
+    <string name="invalid_port">端口无效</string>
+    <string name="key_profiles">按键配置</string>
+    <string name="new_profile">新的配置</string>
+    <string name="new_profile_title">配置名称</string>
+    <string name="new_profile_error">创建新配置文件时出错</string>
+    <string name="load_profile">载入配置</string>
+    <string name="save_profile">保存配置</string>
+
+    <!-- DeviceListActivity -->
+    <string name="scanning">正在扫描设备...</string>
+    <string name="select_device">选择要连接的设备</string>
+    <string name="none_paired">未配对设备</string>
+    <string name="none_found">未找到设备</string>
+    <string name="title_paired_devices">已配对设备</string>
+    <string name="title_other_devices">其他可用设备</string>
+    <string name="button_scan">扫描设备</string>
+
+    <!-- Cheats -->
+    <string name="no_cheats_help">"还没有添加金手指.\n\n如需添加金手指, 按 <font fgcolor="#ffffffff"><b>菜单键</b></font> 选择 <font fgcolor="#ffffffff"><b>添加金手指</b></font>. 金手指代码可以为:\n\n<li><font fgcolor="#ffffffff"><b>Game Genie</b></font> (eg. SLAIUZ)</li>"</string>
+    <string name="new_cheat">新 秘籍</string>
+    <string name="cheat_code">代码:</string>
+    <string name="cheat_name">名称 (可选):</string>
+    <string name="invalid_cheat_code">金手指代码无效!</string>
+
+    <!-- Settings -->
+    <string name="audio_video_settings">音频&amp;视频设置</string>
+    <string name="audio_settings">音频设置</string>
+    <string name="enable_sound">打开声音</string>
+    <string name="sound_volume">音量</string>
+    <string name="video_settings">视频设置</string>
+    <string name="scaling_mode">缩放模式</string>
+    <string name="aspect_ratio">屏幕比例</string>
+    <string name="fast_forward_speed">游戏加速</string>
+    <string name="frame_skip_settings">跳帧设置​​​​</string>
+    <string name="frame_skip_mode">跳帧模式​​​​​​​​​​</string>
+    <string name="max_frame_skips">最大帧数​​​​​​​​​​​</string>
+    <string name="max_frame_skips_summary">指定连续跳帧的最大数量</string>
+    <string name="refresh_rate">屏幕刷新率</string>
+    <string name="refresh_rate_summary">MOTO Droid 2.1 用户须将此数值设为 30！</string>
+    <string name="accurate_rendering">精确绘制</string>
+    <string name="accurate_rendering_summary">切换需要!</string>
+    <string name="accurate_rendering_prompt">直到重新加载游戏后才可生效</string>
+    <string name="input_settings">输入设置​​​​​​​​​​</string>
+    <string name="second_controller">2号玩家配置</string>
+    <string name="second_controller_summary">注意！需要关闭虚拟键盘来使用光枪控制器</string>
+    <string name="key_mappings">设置按键映射</string>
+    <string name="key_mappings_summary">手机的硬件按键映射为游戏地图键</string>
+    <string name="gamepad_1">手柄 1</string>
+    <string name="gamepad_2">手柄 2</string>
+    <string name="shortcut_keys">快捷键</string>
+    <string name="quick_load">快速读取</string>
+    <string name="quick_save">快速存档</string>
+    <string name="vkeypad_settings">虚拟键盘设置</string>
+    <string name="vkeypad_settings_summary">安装了触摸屏幕上的键盘</string>
+    <string name="enable_vibrator">键盘振动</string>
+    <string name="enable_vkeypad">启用虚拟键盘</string>
+    <string name="multitouch_unsupported">此选项需要你的设备支持多点触控！</string>
+    <string name="dpad_4way">禁用斜向十字键</string>
+    <string name="dpad_deadzone">十字键盲区大小</string>
+    <string name="two_buttons_press">双键连按</string>
+    <string name="in_between_press">中键按下</string>
+    <string name="in_between_press_summary">同时模拟“双键连按”和“中键按下”设置</string>
+    <string name="point_size_press">触摸点大小</string>
+    <string name="point_size_press_summary">限定触摸点的大小（在所有设备不工作时）</string>
+    <string name="point_size_press_threshold">点大小阀值</string>
+    <string name="appearance">界面设置</string>
+    <string name="vkeypad_size">虚拟按键大小</string>
+    <string name="vkeypad_transparency">虚拟按键透明度</string>
+    <string name="hide_controls">隐藏虚拟按键​​​​​​​​</string>
+    <string name="hide_dpad">隐藏十字键​​​​​</string>
+    <string name="hide_buttons">隐藏 A/B 键</string>
+    <string name="hide_extra_buttons">隐藏 Turbo A/B 键</string>
+    <string name="disable_extra_buttons">禁用 Turbo A/B 键</string>
+    <string name="hide_select_start">隐藏 Select/Start 键</string>
+    <string name="vkeypad_layout">十字键与A、B键布局</string>
+    <string name="layout_margin">边缘布局</string>
+    <string name="enable_trackball">设置轨迹球为方向键​​​​​​​​​</string>
+    <string name="trackball_sensitivity">轨迹球灵敏度​​​​​​​​​​​​​​​</string>
+    <string name="enable_sensor">重力感应控制左右方向键</string>
+    <string name="sensor_sensitivity">传感器灵敏度</string>
+    <string name="netplay_settings">联网对战设置</string>
+    <string name="max_frames_ahead">最大跳帧帧数</string>
+    <string name="max_frames_ahead_summary">非 0 数值可能会产生严重同步问题！</string>
+    <string name="auto_sync_client">自动同步客户端</string>
+    <string name="auto_sync_client_interval">自动同步时间间隔</string>
+    <string name="other_settings">其它设置</string>
+    <string name="cheating">作弊设置</string>
+    <string name="enable_cheats">开启金手指</string>
+    <string name="enable_game_genie">开启游戏作弊​​​​​</string>
+    <string name="bios">BIOS</string>
+    <string name="game_genie_rom">游戏伴侣</string>
+    <string name="fds_rom">FC磁碟机</string>
+    <string name="user_settings">用户设置​​​​​​​​​</string>
+    <string name="flip_screen">屏幕倒置</string>
+    <string name="flip_screen_summary">十字键位于屏幕右边，而你想将其置于左边时，请勾选此选项</string>
+    <string name="full_screen_mode">全屏模式​​​​​​​​​​​</string>
+    <string name="full_screen_mode_summary">隐藏系统通知栏​​​​​​​​​​​​​​​​​​​​​</string>
+    <string name="orientation">屏幕方向</string>
+    <string name="orientation_summary">设定游戏运行界面显示方向</string>
+    <string name="quick_load_on_start">启动时自动载入</string>
+    <string name="quick_load_on_start_summary">运行游戏时自动载入最新进度</string>
+    <string name="use_input_method">输入设备​​​​​​​​​​​​</string>
+    <string name="use_input_method_summary">开启特殊输入设备（例如：蓝牙手柄）</string>
+    <string name="app_about">关于 Nes模拟器</string>
+    <string name="github">GitHub</string>
+    <string name="press_key_prompt">请按下任意物理按键...</string>
+    <string name="key_none">&lt;空的></string>
+    <string name="key_unknown">&lt;未知的></string>
+    <string name="key_clear">清除</string>
+    <string name="gamepad_up">上</string>
+    <string name="gamepad_down">下</string>
+    <string name="gamepad_left">左</string>
+    <string name="gamepad_right">右</string>
+    <string name="gamepad_up_left">左上</string>
+    <string name="gamepad_up_right">右上</string>
+    <string name="gamepad_down_left">左下</string>
+    <string name="gamepad_down_right">右下</string>
+    <string name="gamepad_select">Select</string>
+    <string name="gamepad_start">Start</string>
+    <string name="gamepad_A">A 键</string>
+    <string name="gamepad_B">B 键</string>
+    <string name="gamepad_A_turbo">Turbo A 键</string>
+    <string name="gamepad_B_turbo">Turbo B 键</string>
+    <string name="gamepad_AB">A 键 + B 键</string>
+
+    <string-array name="exit_game_options">
+        <item>继续游戏</item>
+        <item>保存退出</item>
+        <item>关闭游戏</item>
+    </string-array>
+    <string-array name="scaling_mode_entries">
+        <item>拉伸画面</item>
+        <item>缩放画面</item>
+        <item>二倍放大</item>
+        <item>原始画面</item>
+    </string-array>
+    <string-array name="aspect_ratio_entries">
+        <item>默认</item>
+        <item>4:3 (电视)</item>
+        <item>5:4</item>
+        <item>16:10</item>
+        <item>16:9</item>
+    </string-array>
+    <string-array name="frame_skip_entries">
+        <item>自动跳帧</item>
+        <item>手动跳帧</item>
+    </string-array>
+    <string-array name="refresh_rate_entries">
+        <item>默认</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="second_controller_entries">
+        <item>空的</item>
+        <item>十字键 左/右</item>
+        <item>触摸键 左/右</item>
+    </string-array>
+    <string-array name="vkeypad_size_entries">
+        <item>最大</item>
+        <item>中等</item>
+        <item>最小</item>
+    </string-array>
+    <string-array name="vkeypad_layout_entries">
+        <item>底部 + 底部</item>
+        <item>底部 + 顶部​​​​​​​​​​</item>
+        <item>顶部 + 底部​​​​​​​​​​</item>
+        <item>顶部 + 顶部</item>
+    </string-array>
+    <string-array name="orientation_entries">
+        <item>默认显示</item>
+        <item>横屏模式</item>
+        <item>竖屏模式</item>
+    </string-array>
+    <string-array name="auto_sync_client_entries">
+        <item>10 秒</item>
+        <item>20 秒</item>
+        <item>30 秒</item>
+        <item>45 秒</item>
+        <item>60 秒</item>
+    </string-array>
+
+</resources>

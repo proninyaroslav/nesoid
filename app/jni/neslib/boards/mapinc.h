@@ -1,0 +1,13 @@
+#include "../types.h"
+#include "../x6502.h"
+#include "../fce.h"
+#include "../ppu.h"
+#include "../_memory.h"
+#include "../sound.h"
+#include "../state.h"
+#include "../cart.h"
+#include "../ines.h"
+#include "../cheat.h"
+#include "../unif.h"
+#include "../svga.h"
+#include <string.h>

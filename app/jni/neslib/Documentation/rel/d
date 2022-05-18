@@ -1,0 +1,5 @@
+#!/bin/sh
+
+./da.sh linux
+./da.sh win
+./da.sh dos

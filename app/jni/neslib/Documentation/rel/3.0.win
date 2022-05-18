@@ -1,0 +1,11 @@
+/******************************************************************************/
+/*  3.0)	Platform Specific Notes                                       */
+/******************************************************************************/
+
+        Your desktop color depth must be 16bpp, 24bpp, or 32bpp for FCE Ultra
+        to run properly in windowed mode.
+
+	FCE Ultra's base directory is the directory in which the executable
+	is located.
+
+
