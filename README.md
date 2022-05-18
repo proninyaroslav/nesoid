@@ -2,7 +2,7 @@
 
 <p><img src="app/app_icon-web.png" width="150"></p>
 <h2><b></b></h2>
-<h4>Nesoid is the famous NES/FC emulator for Android. Fork of the original project: <a alt=https://sourceforge.net/projects/nesoid>https://sourceforge.net/projects/nesoid</a></h4>
+<h4>Nesoid is the famous NES/FC emulator for Android. Fork of the original project: <a href="https://sourceforge.net/projects/nesoid">https://sourceforge.net/projects/nesoid</a></h4>
 
 [<img alt="Get it on GitHub" height="80" src="https://tachibanagenerallaboratories.github.io/images/badges/GitHub/get-it-on-github.png">](https://github.com/proninyaroslav/nesoid/releases)
 [<img alt="Get it on Android File Host" height="80" src="https://tachibanagenerallaboratories.github.io/images/badges/Android%20File%20Host/android-file-host-badge.png">](https://www.androidfilehost.com/?w=files&flid=334324)
