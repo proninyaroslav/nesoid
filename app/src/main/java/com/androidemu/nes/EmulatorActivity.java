@@ -1,5 +1,6 @@
 package com.androidemu.nes;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,21 +17,24 @@ import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -111,6 +115,14 @@ public class EmulatorActivity extends Activity implements
 	private NetPlayService netPlayService;
 	private int autoSyncClientInterval;
 
+    private View decorView;
+	private GestureDetectorCompat gestureDetector;
+	private Handler hideActionBarTimer = new Handler(Looper.getMainLooper());
+
+	private final int ACTION_BAR_SWIPE_THRESHOLD = 50;
+	private final int ACTION_BAR_SWIPE_REGION = 100;
+	private final int ACTION_BAR_ANIMATION_DURATION = 2500;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -119,7 +131,15 @@ public class EmulatorActivity extends Activity implements
 			finish();
 			return;
 		}
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener(visibility -> {
+            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                hideSystemUi(decorView);
+            }
+        });
+		gestureDetector = new GestureDetectorCompat(this, gestureListener);
+
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -229,9 +249,71 @@ public class EmulatorActivity extends Activity implements
 			emulator.resume();
 		} else
 			emulator.pause();
+
+        if (hasFocus) {
+            hideSystemUi(decorView);
+        }
 	}
 
-	@Override
+    private void hideSystemUi(View decorView) {
+        setActionBarVisibility(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
+    private void setActionBarVisibility(boolean show) {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            if (show) {
+                actionBar.show();
+				hideActionBarTimer.postDelayed(
+						() -> setActionBarVisibility(false),
+						ACTION_BAR_ANIMATION_DURATION
+				);
+            } else {
+                actionBar.hide();
+            }
+        }
+    }
+
+	private final GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener() {
+		@Override
+		public boolean onDown(MotionEvent motionEvent) {
+			return false;
+		}
+
+		@Override
+		public void onShowPress(MotionEvent motionEvent) {}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent motionEvent) {
+			return false;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+			return false;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent motionEvent) {}
+
+		@Override
+		public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
+			float y1 = event1.getY();
+			float y2 = event2.getY();
+			if (y1 >= 0 && y1 <= ACTION_BAR_SWIPE_REGION && y2 - y1 >= ACTION_BAR_SWIPE_THRESHOLD) {
+				setActionBarVisibility(true);
+			}
+			return true;
+		}
+	};
+
+    @Override
 	protected void onNewIntent(Intent intent) {
 		if (!Intent.ACTION_VIEW.equals(intent.getAction()))
 			return;
@@ -651,6 +733,7 @@ public class EmulatorActivity extends Activity implements
 	}
 
 	public boolean onTouch(View v, MotionEvent event) {
+		gestureDetector.onTouchEvent(event);
 		if (vkeypad != null)
 			return vkeypad.onTouch(event, flipScreen);
 
