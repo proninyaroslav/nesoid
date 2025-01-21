@@ -5,6 +5,7 @@ plugins {
 android {
     namespace 'com.androidemu.nes'
     compileSdk 21
+    ndkVersion "21.4.7075529"
 
     defaultConfig {
         applicationId "com.androidemu.nes"
