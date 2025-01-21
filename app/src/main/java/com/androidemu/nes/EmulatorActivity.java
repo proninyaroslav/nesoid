@@ -120,7 +120,7 @@ public class EmulatorActivity extends Activity implements
 	private Handler hideActionBarTimer = new Handler(Looper.getMainLooper());
 
 	private final int ACTION_BAR_SWIPE_THRESHOLD = 50;
-	private final int ACTION_BAR_SWIPE_REGION = 100;
+	private final int ACTION_BAR_SWIPE_REGION = 150;
 	private final int ACTION_BAR_ANIMATION_DURATION = 2500;
 
 	@Override
@@ -215,6 +215,11 @@ public class EmulatorActivity extends Activity implements
 	protected void onPause() {
 		super.onPause();
 
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.removeOnMenuVisibilityListener(menuListener);
+        }
+
 		pauseEmulator();
 		if (sensor != null)
 			sensor.setGameKeyListener(null);
@@ -223,6 +228,11 @@ public class EmulatorActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
+
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.addOnMenuVisibilityListener(menuListener);
+        }
 
 		if (sensor != null)
 			sensor.setGameKeyListener(this);
@@ -262,7 +272,11 @@ public class EmulatorActivity extends Activity implements
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
+        } else {
+			decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+					| View.SYSTEM_UI_FLAG_FULLSCREEN);
+		}
     }
 
     private void setActionBarVisibility(boolean show) {
@@ -279,6 +293,14 @@ public class EmulatorActivity extends Activity implements
             }
         }
     }
+
+    private final ActionBar.OnMenuVisibilityListener menuListener = (visible) -> {
+        if (visible) {
+            hideActionBarTimer.removeCallbacksAndMessages(null);
+        } else {
+            setActionBarVisibility(false);
+        }
+    };
 
 	private final GestureDetector.OnGestureListener gestureListener = new GestureDetector.OnGestureListener() {
 		@Override

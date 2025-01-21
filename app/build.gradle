@@ -10,6 +10,7 @@ android {
     defaultConfig {
         applicationId "com.androidemu.nes"
         minSdk 16
+        //noinspection ExpiredTargetSdkVersion
         targetSdk 21
         versionCode 61
         versionName "2.5"
