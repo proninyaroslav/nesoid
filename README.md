@@ -13,6 +13,8 @@
 
 </div>
 
+**[4PDA forum theme](https://4pda.to/forum/index.php?showtopic=131306)**
+
 ----
 
 ## 📋 What's changed
