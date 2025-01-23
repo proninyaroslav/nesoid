@@ -279,7 +279,11 @@ public class EmulatorActivity extends Activity implements
 		}
     }
 
-    private void setActionBarVisibility(boolean show) {
+	private void setActionBarVisibility(boolean show) {
+		setActionBarVisibility(show, false);
+	}
+
+    private void setActionBarVisibility(boolean show, boolean delayHide) {
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             if (show) {
@@ -288,9 +292,14 @@ public class EmulatorActivity extends Activity implements
 						() -> setActionBarVisibility(false),
 						ACTION_BAR_ANIMATION_DURATION
 				);
+            } else if (delayHide) {
+				hideActionBarTimer.postDelayed(
+						() -> setActionBarVisibility(false),
+						ACTION_BAR_ANIMATION_DURATION
+				);
             } else {
-                actionBar.hide();
-            }
+				actionBar.hide();
+			}
         }
     }
 
@@ -298,7 +307,7 @@ public class EmulatorActivity extends Activity implements
         if (visible) {
             hideActionBarTimer.removeCallbacksAndMessages(null);
         } else {
-            setActionBarVisibility(false);
+            setActionBarVisibility(false, true);
         }
     };
 
