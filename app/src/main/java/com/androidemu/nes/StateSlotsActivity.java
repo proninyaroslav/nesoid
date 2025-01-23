@@ -158,7 +158,7 @@ public class StateSlotsActivity extends ListActivity {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null)
-				convertView = inflater.inflate(R.layout.state_slot_item, parent);
+				convertView = inflater.inflate(R.layout.state_slot_item, parent,false);
 
 			TextView nameView = (TextView) convertView.findViewById(R.id.name);
 			nameView.setText(getSlotName(position));
